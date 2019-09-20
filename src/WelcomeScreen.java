@@ -272,6 +272,7 @@ class WelcomeScreen {
     }
 
     private static void newGame() {
+
         frame.setVisible(false);
         frame.dispose();
         frame = new JFrame("New Game");
