@@ -4,16 +4,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 class WelcomeScreen {
-    /**
-     * Main method to drive initial game setup
-     * @param args special inputs
-     */
+
     private static JFrame frame = new JFrame("Space Trader by Runtime Terror");
     private static int skillPoints = 16;
     private static String difficulty = "Easy";
     private static Player createdPlayer = null;
 
-
+    /**
+     * Main method to drive initial game setup
+     * @param args special inputs
+     */
     public static void main(String[] args) {
         javax.swing.SwingUtilities.invokeLater(() -> showStartPage(frame));
     }
@@ -209,8 +209,6 @@ class WelcomeScreen {
         c.weighty = 0.1;
         frame.add(engineerBox, c);
 
-
-        //
         JLabel nameText = new JLabel("Player Name: ");
         nameText.setHorizontalAlignment(JLabel.RIGHT);
         c = new GridBagConstraints();
@@ -228,9 +226,6 @@ class WelcomeScreen {
         c.gridy = 8;
         c.weighty = 0.2;
         frame.add(nameBox, c);
-        //
-
-
 
         JButton startButton = new JButton("Start!");
         c = new GridBagConstraints();
