@@ -25,4 +25,16 @@ public class Player {
                 "\nmerchant=" + merchant +
                 "\nengineer=" + engineer;
     }
+
+    public String[] toArray() {
+        String[] response = new String[6];
+        response[0] = "Name: " + name;
+        response[1] = "Difficulty: " + difficulty;
+        response[2] = "Pilot: " + pilot;
+        response[3] = "Fighter: " + fighter;
+        response[4] = "Merchant: " + merchant;
+        response[5] = "Engineer: " + engineer;
+
+        return response;
+    }
 }

@@ -282,10 +282,7 @@ class WelcomeScreen {
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JLabel playerText = new JLabel();
-        String infoText = createdPlayer.toString();
-        playerText.setHorizontalAlignment(JLabel.CENTER);
-        playerText.setText("<html>" + infoText + "</html>");
+        JList playerInfo = new JList(createdPlayer.toArray());
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.CENTER;
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -295,32 +292,8 @@ class WelcomeScreen {
         c.weighty = 1;
         c.ipadx = 30;
         c.ipady = 30;
-        c.anchor = GridBagConstraints.CENTER;
-        frame.add(playerText, c);
+        frame.add(playerInfo, c);
 
         frame.setVisible(true);
     }
-
-    /**
-    private static void newGame() {
-        frame.setVisible(false);
-        frame.dispose();
-        frame = new JFrame("X");
-
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(400, 300);
-        frame.setLayout(new GridBagLayout());
-        GridBagConstraints c = new GridBagConstraints();
-
-        JLabel player = new JLabel();
-        player.setText("x");
-        player.setHorizontalAlignment(JLabel.CENTER);
-        c.fill = GridBagConstraints.HORIZONTAL;
-        c.gridx = 0;
-        c.gridy = 1;
-        c.weighty = 1;
-        frame.add(player, c);
-    }
-
-     **/
 }
