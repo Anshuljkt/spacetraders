@@ -1,13 +1,20 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 class WelcomeScreen {
     /**
      * Main method to drive initial game setup
      * @param args special inputs
      */
+    private static JFrame frame = new JFrame("Space Trader by Runtime Terror");
+    private static int skillPoints = 16;
+    private static String difficulty = "Easy";
+    private static Player createdPlayer = null;
+
+
     public static void main(String[] args) {
-        JFrame frame = new JFrame("Space Trader by Runtime Terror");
         javax.swing.SwingUtilities.invokeLater(() -> showStartPage(frame));
     }
 
@@ -42,7 +49,7 @@ class WelcomeScreen {
         c.anchor = GridBagConstraints.PAGE_END;
         startButton.addActionListener(e -> {
             showConfigPage(frame);
-            System.out.println("New Game Started.");
+            System.out.println("Config Screen Shown");
         });
         frame.add(startButton, c);
         frame.setVisible(true);
@@ -53,6 +60,267 @@ class WelcomeScreen {
         frame.setVisible(false);
         frame.dispose();
         frame = new JFrame("Character Selection");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel info = new JLabel();
+        String infoText = "You have 12 skill points to allocate to different"
+                + " skills for your character. Please also select your"
+                + " difficulty.";
+        info.setHorizontalAlignment(JLabel.CENTER);
+        info.setText("<html>" + infoText + "</html>");
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 0.8;
+        c.weighty = 0.2;
+        c.ipadx = 10;
+        c.ipady = 10;
+        c.anchor = GridBagConstraints.PAGE_START;
+        frame.add(info, c);
+
+        JLabel skillPointsText = new JLabel();
+        String skillPointsDesc = "Skill Points Available: ";
+        skillPointsText.setHorizontalAlignment(JLabel.CENTER);
+        skillPointsText.setText("<html>" + skillPointsDesc + skillPoints + "</html>");
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = 1;
+        c.weighty = 0.1;
+        c.ipadx = 10;
+        c.ipady = 10;
+        c.anchor = GridBagConstraints.CENTER;
+        frame.add(skillPointsText, c);
+
+
+        JLabel diffText = new JLabel("Difficulty: ");
+        diffText.setHorizontalAlignment(JLabel.RIGHT);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 2;
+        c.weightx = 0.5;
+        c.weighty = 0.1;
+        frame.add(diffText, c);
+
+        String[] difficulties = new String[] {"Easy", "Medium", "Hard"};
+        JComboBox diffBox = new JComboBox<>(difficulties);
+        diffBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                difficulty = (String) diffBox.getItemAt(diffBox.getSelectedIndex());
+                if (difficulty.equals("Easy")) {
+                    skillPoints = 16;
+                } else if (difficulty.equals("Medium")) {
+                    skillPoints = 12;
+                } else if (difficulty.equals("Hard")) {
+                    skillPoints = 8;
+                } else {
+                    difficulty = "Easy";
+                    skillPoints = 12;
+                }
+                skillPointsText.setText("<html>" + skillPointsDesc + skillPoints + "</html>");
+            }
+        });
+        c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 2;
+        c.weightx = 0.5;
+        c.weighty = 0.1;
+        frame.add(diffBox, c);
+
+        JLabel pilotText = new JLabel("Pilot: ");
+        pilotText.setHorizontalAlignment(JLabel.RIGHT);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 3;
+        c.weighty = 0.1;
+        frame.add(pilotText, c);
+
+        JTextField pilotBox = new JTextField();
+        pilotBox.setMinimumSize(new Dimension(100,30));
+        c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 1;
+        c.gridy = 3;
+        c.weighty = 0.1;
+        frame.add(pilotBox, c);
+
+
+        JLabel fighterText = new JLabel("Fighter: ");
+        fighterText.setHorizontalAlignment(JLabel.RIGHT);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 4;
+        c.weighty = 0.1;
+        frame.add(fighterText, c);
+
+        JTextField fighterBox = new JTextField();
+        fighterBox.setMinimumSize(new Dimension(100,30));
+        c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 1;
+        c.gridy = 4;
+        c.weighty = 0.1;
+        frame.add(fighterBox, c);
+
+
+        JLabel merchantText = new JLabel("Merchant: ");
+        merchantText.setHorizontalAlignment(JLabel.RIGHT);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 5;
+        c.weighty = 0.1;
+        frame.add(merchantText, c);
+
+        JTextField merchantBox = new JTextField();
+        merchantBox.setMinimumSize(new Dimension(100,30));
+        c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 1;
+        c.gridy = 5;
+        c.weighty = 0.1;
+        frame.add(merchantBox, c);
+
+
+        JLabel engineerText = new JLabel("Engineer: ");
+        engineerText.setHorizontalAlignment(JLabel.RIGHT);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 6;
+        c.weighty = 0.1;
+        frame.add(engineerText, c);
+
+        JTextField engineerBox = new JTextField();
+        engineerBox.setMinimumSize(new Dimension(100,30));
+        c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 1;
+        c.gridy = 6;
+        c.weighty = 0.1;
+        frame.add(engineerBox, c);
+
+
+        //
+        JLabel nameText = new JLabel("Player Name: ");
+        nameText.setHorizontalAlignment(JLabel.RIGHT);
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 8;
+        c.weighty = 0.2;
+        frame.add(nameText, c);
+
+        JTextField nameBox = new JTextField();
+        nameBox.setMinimumSize(new Dimension(100,30));
+        c = new GridBagConstraints();
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 1;
+        c.gridy = 8;
+        c.weighty = 0.2;
+        frame.add(nameBox, c);
+        //
+
+
+
+        JButton startButton = new JButton("Start!");
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.SOUTH;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 0;
+        c.gridy = 9;
+        c.weighty = 0.4;
+        c.anchor = GridBagConstraints.PAGE_END;
+        startButton.addActionListener(e -> {
+            int pilot = -1;
+            int fighter = -1;
+            int merchant = -1;
+            int engineer = -1;
+            String name = "";
+            try {
+                pilot = Integer.parseInt(pilotBox.getText());
+                fighter = Integer.parseInt(fighterBox.getText());
+                merchant = Integer.parseInt(merchantBox.getText());
+                engineer = Integer.parseInt(engineerBox.getText());
+                name = nameBox.getText();
+            }
+            catch (Exception f) {
+                //%TODO: Sanitize Inputs
+            }
+            System.out.println("pilot = " + pilot);
+            System.out.println("fighter = " + fighter);
+            System.out.println("merchant = " + merchant);
+            System.out.println("engineer = " + engineer);
+            System.out.println("name = " + name);
+            System.out.println("difficulty = " + difficulty);
+
+            createdPlayer = new Player(name, difficulty, pilot, fighter, merchant, engineer);
+            newGame();
+            System.out.println("New Game Started");
+        });
+        frame.add(startButton, c);
         frame.setVisible(true);
     }
+
+    private static void newGame() {
+        frame.setVisible(false);
+        frame.dispose();
+        frame = new JFrame("New Game");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel playerText = new JLabel();
+        String infoText = createdPlayer.toString();
+        playerText.setHorizontalAlignment(JLabel.CENTER);
+        playerText.setText("<html>" + infoText + "</html>");
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.CENTER;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = 1;
+        c.weighty = 1;
+        c.ipadx = 30;
+        c.ipady = 30;
+        c.anchor = GridBagConstraints.CENTER;
+        frame.add(playerText, c);
+
+        frame.setVisible(true);
+    }
+
+    /**
+    private static void newGame() {
+        frame.setVisible(false);
+        frame.dispose();
+        frame = new JFrame("X");
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        JLabel player = new JLabel();
+        player.setText("x");
+        player.setHorizontalAlignment(JLabel.CENTER);
+        c.fill = GridBagConstraints.HORIZONTAL;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weighty = 1;
+        frame.add(player, c);
+    }
+
+     **/
 }
