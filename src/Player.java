@@ -6,14 +6,22 @@ public class Player {
     private int merchant;
     private int engineer;
     private int credits;
+    private int skillPoints;
 
-    public Player(String name, String difficulty, int pilot, int fighter, int merchant, int engineer) {
+    public Player(String name, String difficulty, int pilot, int fighter, int merchant, int engineer, int skillPoints) {
+        if (name.isEmpty()) {
+            name = "Trader Joe";
+        }
+        if (pilot + fighter + merchant + engineer != skillPoints) {
+            pilot = fighter = merchant = engineer = skillPoints / 4;
+        }
         this.name = name;
         this.difficulty = difficulty;
         this.pilot = pilot;
         this.fighter = fighter;
         this.merchant = merchant;
         this.engineer = engineer;
+        this.skillPoints = skillPoints;
 
         if (difficulty.equals("Easy")) {
             this.credits = 1000;

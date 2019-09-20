@@ -66,9 +66,7 @@ class WelcomeScreen {
         GridBagConstraints c = new GridBagConstraints();
 
         JLabel info = new JLabel();
-        String infoText = "You have 12 skill points to allocate to different"
-                + " skills for your character. Please also select your"
-                + " difficulty.";
+        String infoText = "Please select your desired difficulty. \nYou also have some skill points to assign.";
         info.setHorizontalAlignment(JLabel.CENTER);
         info.setText("<html>" + infoText + "</html>");
         c = new GridBagConstraints();
@@ -265,7 +263,7 @@ class WelcomeScreen {
             System.out.println("name = " + name);
             System.out.println("difficulty = " + difficulty);
 
-            createdPlayer = new Player(name, difficulty, pilot, fighter, merchant, engineer);
+            createdPlayer = new Player(name, difficulty, pilot, fighter, merchant, engineer, skillPoints);
             newGame();
             System.out.println("New Game Started");
         });
