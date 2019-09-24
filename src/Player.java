@@ -1,7 +1,7 @@
 @SuppressWarnings("CanBeFinal")
 public class Player {
     private String name;
-    private String difficulty;
+    public String difficulty;
     private int pilot;
     private int fighter;
     private int merchant;
@@ -9,6 +9,7 @@ public class Player {
     private int credits;
     private int skillPoints;
     private Region region;
+    private double money;
 
 
     public String getName() {
@@ -68,10 +69,13 @@ public class Player {
 
         if (difficulty.equals("Easy")) {
             this.credits = 1000;
+            this.money = 300.00;
         } else if (difficulty.equals("Medium")) {
             this.credits = 750;
+            this.money = 200.00;
         } else if (difficulty.equals("Hard")) {
             this.credits = 500;
+            this.money = 100.00
         } else {
             this.difficulty = "Easy";
             this.credits = 1000;
