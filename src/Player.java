@@ -75,7 +75,7 @@ public class Player {
             this.money = 200.00;
         } else if (difficulty.equals("Hard")) {
             this.credits = 500;
-            this.money = 100.00
+            this.money = 100.00;
         } else {
             this.difficulty = "Easy";
             this.credits = 1000;
