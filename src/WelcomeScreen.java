@@ -235,6 +235,7 @@ class WelcomeScreen {
         c.gridy = 9;
         c.weighty = 0.4;
         c.anchor = GridBagConstraints.PAGE_END;
+        JFrame finalFrame = frame;
         startButton.addActionListener(e -> {
             int pilot = -1;
             int fighter = -1;
@@ -260,14 +261,14 @@ class WelcomeScreen {
             System.out.println("engineer = " + createdPlayer.getEngineer());
             System.out.println("name = " + createdPlayer.getName());
             System.out.println("difficulty = " + difficulty);
-            newGame();
+            newGame(finalFrame);
             System.out.println("New Game Started");
         });
         frame.add(startButton, c);
         frame.setVisible(true);
     }
 
-    private static void newGame() {
+    private static void newGame(JFrame frame) {
 
         frame.setVisible(false);
         frame.dispose();
