@@ -237,10 +237,10 @@ class WelcomeScreen {
         c.anchor = GridBagConstraints.PAGE_END;
         JFrame finalFrame = frame;
         startButton.addActionListener(e -> {
-            int pilot = -1;
-            int fighter = -1;
-            int merchant = -1;
-            int engineer = -1;
+            int pilot = 0;
+            int fighter = 0;
+            int merchant = 0;
+            int engineer = 0;
             String name = "";
             try {
                 pilot = Integer.parseInt(pilotBox.getText());
