@@ -52,11 +52,27 @@ public class Player {
         this.region = region;
     }
 
+    public int getPilot() {
+        return pilot;
+    }
+
+    public int getFighter() {
+        return fighter;
+    }
+
+    public int getMerchant() {
+        return merchant;
+    }
+
+    public int getEngineer() {
+        return engineer;
+    }
+
     public Player(String name, String difficulty, int pilot, int fighter, int merchant, int engineer, int skillPoints) {
         if (name.isEmpty()) {
             name = "Trader Joe";
         }
-        if (pilot + fighter + merchant + engineer != skillPoints) {
+        if (pilot + fighter + merchant + engineer > skillPoints) {
             pilot = fighter = merchant = engineer = skillPoints / 4;
         }
         this.name = name;

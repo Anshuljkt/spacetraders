@@ -251,14 +251,15 @@ class WelcomeScreen {
             catch (Exception f) {
                 //%TODO: Sanitize Inputs
             }
-            System.out.println("pilot = " + pilot);
-            System.out.println("fighter = " + fighter);
-            System.out.println("merchant = " + merchant);
-            System.out.println("engineer = " + engineer);
-            System.out.println("name = " + name);
-            System.out.println("difficulty = " + difficulty);
+
 
             createdPlayer = new Player(name, difficulty, pilot, fighter, merchant, engineer, skillPoints);
+            System.out.println("pilot = " + createdPlayer.getPilot());
+            System.out.println("fighter = " + createdPlayer.getFighter());
+            System.out.println("merchant = " + createdPlayer.getMerchant());
+            System.out.println("engineer = " + createdPlayer.getEngineer());
+            System.out.println("name = " + createdPlayer.getName());
+            System.out.println("difficulty = " + difficulty);
             newGame();
             System.out.println("New Game Started");
         });
