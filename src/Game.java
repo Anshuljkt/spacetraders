@@ -4,15 +4,13 @@ public class Game {
     private Player player;
     private final String[] regionNames = {"John Land", "Mariaopolis", "Fordton", "Anshul Andromeda", "Star Cluster X"
             , "Sun", "Earth", "Region 8", "Region 9", "Region 10"};
+    private Universe universe;
 
     public Game(String diff, Player player) {
         this.difficulty = diff;
         this.player = player;
-        startGame();
-    }
-
-    public void startGame() {
-        Universe universe = new Universe(regionNames);
+        this.universe = new Universe(regionNames);
+        player.setRegion(universe.getRandomRegion());
     }
 
     public Player getPlayer() {

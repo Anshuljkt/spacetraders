@@ -296,6 +296,21 @@ class WelcomeScreen {
         c.ipady = 5;
         frame.add(playerInfo, c);
 
+        JButton beginButton = new JButton("Start Game");
+        c = new GridBagConstraints();
+        c.fill = GridBagConstraints.SOUTH;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.gridx = 0;
+        c.gridy = 9;
+        c.weighty = 0.4;
+        c.anchor = GridBagConstraints.PAGE_END;
+        JFrame finalFrame = frame;
+        beginButton.addActionListener(e -> {
+            gameUI.playGame();
+            finalFrame.dispose();
+        });
+        frame.add(beginButton, c);
+
         game = new Game(difficulty, createdPlayer);
         gameUI = new GameUI(game);
         frame.setLocationRelativeTo(null);

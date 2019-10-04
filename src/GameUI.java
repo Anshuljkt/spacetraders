@@ -6,8 +6,7 @@ public class GameUI {
         this.game = game;
     }
 
-    static void PlayGame() {
-
+    static void playGame() {
 
     }
 }

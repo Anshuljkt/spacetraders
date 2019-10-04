@@ -12,5 +12,10 @@ public class Universe {
                     , TechLevel.getRandomTech(), regionNames[i]);
         }
     }
+
+    public Region getRandomRegion() {
+        int regionNum = random.nextInt(regions.length);
+        return regions[regionNum];
+    }
     //create all regions
 }
