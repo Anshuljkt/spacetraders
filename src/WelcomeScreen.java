@@ -10,6 +10,7 @@ class WelcomeScreen {
     private static String difficulty = "Easy";
     private static Player createdPlayer = null;
     private static Game game;
+    private static MainGame mainGame;
 
     /**
      * Main method to drive initial game setup
@@ -299,6 +300,7 @@ class WelcomeScreen {
         frame.add(playerInfo, c);
 
         game = new Game(difficulty, createdPlayer);
+        mainGame = new MainGame(game);
         frame.setVisible(true);
     }
 }

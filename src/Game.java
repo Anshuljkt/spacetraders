@@ -2,7 +2,6 @@ public class Game {
 
     private String difficulty;
     private Player player;
-    private MainGame game;
     private final String[] regionNames = {"John Land", "Mariaopolis", "Fordton", "Anshul Andromeda", "Star Cluster X"
             , "Sun", "Earth", "Region 8", "Region 9", "Region 10"};
 
@@ -10,8 +9,6 @@ public class Game {
         this.difficulty = diff;
         this.player = player;
         startGame();
-        game = new MainGame();
-        game.PlayGame();
     }
 
     public void startGame() {
