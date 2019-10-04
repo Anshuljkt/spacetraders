@@ -228,7 +228,7 @@ class WelcomeScreen {
         c.weighty = 0.2;
         frame.add(nameBox, c);
 
-        JButton startButton = new JButton("Start!");
+        JButton startButton = new JButton("Create Player");
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.SOUTH;
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -294,8 +294,8 @@ class WelcomeScreen {
         c.gridy = 0;
         c.weightx = 1;
         c.weighty = 1;
-        c.ipadx = 30;
-        c.ipady = 30;
+        c.ipadx = 5;
+        c.ipady = 5;
         frame.add(playerInfo, c);
 
         game = new Game(difficulty, createdPlayer);
