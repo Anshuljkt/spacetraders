@@ -256,6 +256,13 @@ class WelcomeScreen {
 
 
             createdPlayer = new Player(name, difficulty, pilot, fighter, merchant, engineer, skillPoints);
+            if (difficulty.equals("Easy")) {
+                createdPlayer.setCredits(1500);
+            } else if (difficulty.equals("Medium")) {
+                createdPlayer.setCredits(1000);
+            } else {
+                createdPlayer.setCredits(500);
+            }
             System.out.println("pilot = " + createdPlayer.getPilot());
             System.out.println("fighter = " + createdPlayer.getFighter());
             System.out.println("merchant = " + createdPlayer.getMerchant());
