@@ -9,6 +9,7 @@ class WelcomeScreen {
     private static int skillPoints = 16;
     private static String difficulty = "Easy";
     private static Player createdPlayer = null;
+    private Game game;
 
     /**
      * Main method to drive initial game setup
