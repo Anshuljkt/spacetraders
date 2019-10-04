@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 class WelcomeScreen {
 
@@ -54,12 +52,13 @@ class WelcomeScreen {
             System.out.println("Config Screen Shown");
         });
         frame.add(startButton, c);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     //TODO: configPage
     private static void showConfigPage(JFrame frame) {
-        //frame.setVisible(false);
+//        frame.setVisible(false);
         frame.dispose();
         frame = new JFrame("Character Selection");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,22 +112,19 @@ class WelcomeScreen {
 
         String[] difficulties = new String[] {"Easy", "Medium", "Hard"};
         JComboBox diffBox = new JComboBox<>(difficulties);
-        diffBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                difficulty = (String) diffBox.getItemAt(diffBox.getSelectedIndex());
-                if (difficulty.equals("Easy")) {
-                    skillPoints = 16;
-                } else if (difficulty.equals("Medium")) {
-                    skillPoints = 12;
-                } else if (difficulty.equals("Hard")) {
-                    skillPoints = 8;
-                } else {
-                    difficulty = "Easy";
-                    skillPoints = 12;
-                }
-                skillPointsText.setText("<html>" + skillPointsDesc + skillPoints + "</html>");
+        diffBox.addActionListener(e -> {
+            difficulty = (String) diffBox.getItemAt(diffBox.getSelectedIndex());
+            if (difficulty.equals("Easy")) {
+                skillPoints = 16;
+            } else if (difficulty.equals("Medium")) {
+                skillPoints = 12;
+            } else if (difficulty.equals("Hard")) {
+                skillPoints = 8;
+            } else {
+                difficulty = "Easy";
+                skillPoints = 12;
             }
+            skillPointsText.setText("<html>" + skillPointsDesc + skillPoints + "</html>");
         });
         c = new GridBagConstraints();
         c.gridx = 1;
@@ -245,7 +241,6 @@ class WelcomeScreen {
             int merchant = 0;
             int engineer = 0;
             String name = "";
-            boolean validInputs = false;
             try {
                 pilot = Integer.parseInt(pilotBox.getText());
                 fighter = Integer.parseInt(fighterBox.getText());
@@ -276,12 +271,12 @@ class WelcomeScreen {
             System.out.println("New Game Started");
         });
         frame.add(startButton, c);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 
     private static void newGame(JFrame frame) {
-
-        frame.setVisible(false);
+//        frame.setVisible(false);
         frame.dispose();
         frame = new JFrame("New Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -303,6 +298,7 @@ class WelcomeScreen {
 
         game = new Game(difficulty, createdPlayer);
         gameUI = new GameUI(game);
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
 }

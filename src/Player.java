@@ -62,7 +62,8 @@ public class Player {
         if (name.isEmpty()) {
             name = "Trader Joe";
         }
-        if (pilot + fighter + merchant + engineer > skillPoints) {
+        int allocations = pilot + fighter + merchant + engineer;
+        if (allocations <= 0 || allocations > skillPoints) {
             pilot = fighter = merchant = engineer = skillPoints / 4;
         }
         this.name = name;
