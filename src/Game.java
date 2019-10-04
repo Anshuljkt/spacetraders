@@ -5,8 +5,7 @@ public class Game {
             , "Sun", "Earth", "Region 8", "Region 9", "Region 10"};
 
     public void startGame() {
-        Universe universe = new Universe();
-
+        Universe universe = new Universe(regionNames);
     }
 
 }
