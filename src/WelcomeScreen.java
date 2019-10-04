@@ -9,7 +9,7 @@ class WelcomeScreen {
     private static int skillPoints = 16;
     private static String difficulty = "Easy";
     private static Player createdPlayer = null;
-    private Game game;
+    private static Game game;
 
     /**
      * Main method to drive initial game setup
@@ -58,7 +58,7 @@ class WelcomeScreen {
 
     //TODO: configPage
     private static void showConfigPage(JFrame frame) {
-        frame.setVisible(false);
+        //frame.setVisible(false);
         frame.dispose();
         frame = new JFrame("Character Selection");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -298,6 +298,7 @@ class WelcomeScreen {
         c.ipady = 30;
         frame.add(playerInfo, c);
 
+        game = new Game(difficulty, createdPlayer);
         frame.setVisible(true);
     }
 }

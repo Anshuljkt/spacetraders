@@ -15,4 +15,23 @@ public class Game {
         Universe universe = new Universe(regionNames);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public String getDifficulty() {
+        return difficulty;
+    }
+
+    public void setDifficulty(String difficulty) {
+        this.difficulty = difficulty;
+    }
+
+    public String[] getRegionNames() {
+        return regionNames;
+    }
 }
