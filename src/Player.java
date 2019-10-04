@@ -58,7 +58,7 @@ public class Player {
         return engineer;
     }
 
-    public Player(String name, String difficulty, int pilot, int fighter, int merchant, int engineer, int skillPoints) {
+    public Player(String name, int pilot, int fighter, int merchant, int engineer, int skillPoints) {
         if (name.isEmpty()) {
             name = "Trader Joe";
         }

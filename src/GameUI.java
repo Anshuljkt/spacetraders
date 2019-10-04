@@ -1,12 +1,13 @@
-public class MainGame {
+public class GameUI {
     private Game game;
 
 
-    public MainGame(Game game) {
+    public GameUI(Game game) {
         this.game = game;
     }
 
     static void PlayGame() {
+
 
     }
 }

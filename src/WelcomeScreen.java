@@ -10,7 +10,7 @@ class WelcomeScreen {
     private static String difficulty = "Easy";
     private static Player createdPlayer = null;
     private static Game game;
-    private static MainGame mainGame;
+    private static GameUI gameUI;
 
     /**
      * Main method to drive initial game setup
@@ -68,7 +68,8 @@ class WelcomeScreen {
         GridBagConstraints c = new GridBagConstraints();
 
         JLabel info = new JLabel();
-        String infoText = "Please select your desired difficulty. \nYou also have some skill points to assign.";
+        String infoText = "Please select your desired difficulty. "
+                + "\nYou also have some skill points to assign.";
         info.setHorizontalAlignment(JLabel.CENTER);
         info.setText("<html>" + infoText + "</html>");
         c = new GridBagConstraints();
@@ -244,6 +245,7 @@ class WelcomeScreen {
             int merchant = 0;
             int engineer = 0;
             String name = "";
+            boolean validInputs = false;
             try {
                 pilot = Integer.parseInt(pilotBox.getText());
                 fighter = Integer.parseInt(fighterBox.getText());
@@ -256,7 +258,7 @@ class WelcomeScreen {
             }
 
 
-            createdPlayer = new Player(name, difficulty, pilot, fighter, merchant, engineer, skillPoints);
+            createdPlayer = new Player(name, pilot, fighter, merchant, engineer, skillPoints);
             if (difficulty.equals("Easy")) {
                 createdPlayer.setCredits(1500);
             } else if (difficulty.equals("Medium")) {
@@ -300,7 +302,7 @@ class WelcomeScreen {
         frame.add(playerInfo, c);
 
         game = new Game(difficulty, createdPlayer);
-        mainGame = new MainGame(game);
+        gameUI = new GameUI(game);
         frame.setVisible(true);
     }
 }
