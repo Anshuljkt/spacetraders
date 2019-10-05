@@ -3,7 +3,8 @@ public class Game {
     private String difficulty;
     private Player player;
     private final String[] regionNames = {"John Land", "Mariaopolis", "Fordton", "Anshul Andromeda"
-            , "Star Cluster X", "Sun", "Earth", "Region 8", "Region 9", "Region 10"};
+            , "Xandar", "Coruscant", "Knowhere", "The Death Star", "Space 2"
+            , "Region McRegionFace", "Star Bar", "Kennedy Space Port", "Whiteclaw Cluster"};
     private Universe universe;
 
     public Game(String diff, Player player) {

@@ -89,7 +89,7 @@ public class GameUI {
         c.anchor = GridBagConstraints.CENTER;
         left.addActionListener(e -> {
             if (regDisplay == 0) {
-                regDisplay = 9;
+                regDisplay = game.getRegionNames().length - 1;
             } else {
                 regDisplay--;
             }
@@ -106,7 +106,7 @@ public class GameUI {
         c.gridy = 1;
         c.anchor = GridBagConstraints.CENTER;
         right.addActionListener(e -> {
-            if (regDisplay == 9) {
+            if (regDisplay == game.getRegionNames().length - 1) {
                 regDisplay = 0;
             } else {
                 regDisplay++;

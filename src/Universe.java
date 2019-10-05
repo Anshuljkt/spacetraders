@@ -4,10 +4,12 @@ public class Universe {
 
     private Region[] regions;
     private Random random = new Random();
-    private int[] xCoords = new int[10];
-    private int[] yCoords = new int[10];
+    private int[] xCoords;
+    private int[] yCoords;
 
     public Universe(String[] regionNames) {
+        xCoords = new int[regionNames.length];
+        yCoords = new int[regionNames.length];
         int newX;
         boolean validX;
         int newY;
@@ -21,7 +23,7 @@ public class Universe {
             while (!validX) {
                 validX = true;
                 newX = random.nextInt(401) - 200;
-                System.out.println("Newx: " + newX);
+
                 for (int j = 0; j < i; j++) {
                     if (Math.abs(newX - xCoords[j]) < 5) {
                         validX = false;
@@ -40,8 +42,6 @@ public class Universe {
                 }
             }
             yCoords[i] = newY;
-
-            System.out.println(newX + " " + newY);
 
             regions[i] = new Region(xCoords[i], yCoords[i], TechLevel.getRandomTech()
                     , regionNames[i]);

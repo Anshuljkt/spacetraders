@@ -49,7 +49,6 @@ class WelcomeScreen {
         c.anchor = GridBagConstraints.PAGE_END;
         startButton.addActionListener(e -> {
             showConfigPage(frame);
-            System.out.println("Config Screen Shown");
         });
         frame.add(startButton, c);
         frame.setLocationRelativeTo(null);
@@ -258,14 +257,8 @@ class WelcomeScreen {
             } else {
                 createdPlayer.setCredits(500);
             }
-            System.out.println("pilot = " + createdPlayer.getPilot());
-            System.out.println("fighter = " + createdPlayer.getFighter());
-            System.out.println("merchant = " + createdPlayer.getMerchant());
-            System.out.println("engineer = " + createdPlayer.getEngineer());
-            System.out.println("name = " + createdPlayer.getName());
-            System.out.println("difficulty = " + difficulty);
+
             newGame(finalFrame);
-            //System.out.println("New Game Started");
         });
         frame.add(startButton, c);
         frame.setLocationRelativeTo(null);
