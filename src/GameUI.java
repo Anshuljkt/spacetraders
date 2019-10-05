@@ -24,6 +24,7 @@ public class GameUI {
         c.anchor = GridBagConstraints.NORTH;
         c.gridx = 0;
         c.gridy = 0;
+        c.weightx = .33;
 
         playerPanel.add(playerInfo);
         frame.add(playerInfo, c);
@@ -50,6 +51,7 @@ public class GameUI {
         c.anchor = GridBagConstraints.NORTH;
         c.gridx = 1;
         c.gridy = 0;
+        c.weightx = .33;
 
         frame.add(curRegPanel, c);
 
@@ -132,6 +134,7 @@ public class GameUI {
         c = new GridBagConstraints();
         c.gridy = 0;
         c.gridx = 2;
+        c.weightx = .33;
         c.anchor = GridBagConstraints.NORTH;
 
         frame.add(travelPanel, c);
