@@ -32,4 +32,8 @@ public class Game {
     public String[] getRegionNames() {
         return regionNames;
     }
+
+    public Universe getUniverse() {
+        return universe;
+    }
 }

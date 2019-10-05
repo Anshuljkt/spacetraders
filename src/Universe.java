@@ -17,5 +17,10 @@ public class Universe {
         int regionNum = random.nextInt(regions.length);
         return regions[regionNum];
     }
+
+    public Region[] getRegions() {
+        return regions;
+    }
+
     //create all regions
 }

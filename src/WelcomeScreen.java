@@ -268,7 +268,7 @@ class WelcomeScreen {
             System.out.println("name = " + createdPlayer.getName());
             System.out.println("difficulty = " + difficulty);
             newGame(finalFrame);
-            System.out.println("New Game Started");
+            //System.out.println("New Game Started");
         });
         frame.add(startButton, c);
         frame.setLocationRelativeTo(null);
