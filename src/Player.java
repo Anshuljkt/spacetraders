@@ -46,16 +46,32 @@ public class Player {
         return pilot;
     }
 
+    public void setPilot(int pilot) {
+        this.pilot = pilot;
+    }
+
     public int getFighter() {
         return fighter;
+    }
+
+    public void setFighter(int fighter) {
+        this.fighter = fighter;
     }
 
     public int getMerchant() {
         return merchant;
     }
 
+    public void setMerchant(int merchant) {
+        this.merchant = merchant;
+    }
+
     public int getEngineer() {
         return engineer;
+    }
+
+    public void setEngineer(int engineer) {
+        this.engineer = engineer;
     }
 
     public Player(String name, int pilot, int fighter, int merchant
