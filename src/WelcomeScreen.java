@@ -56,9 +56,7 @@ class WelcomeScreen {
         frame.setVisible(true);
     }
 
-    //TODO: configPage
     private static void showConfigPage(JFrame frame) {
-//        frame.setVisible(false);
         frame.dispose();
         frame = new JFrame("Character Selection");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -143,7 +141,7 @@ class WelcomeScreen {
         frame.add(pilotText, c);
 
         JTextField pilotBox = new JTextField();
-        pilotBox.setMinimumSize(new Dimension(100,30));
+        pilotBox.setMinimumSize(new Dimension(100, 30));
         c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.gridx = 1;
@@ -162,7 +160,7 @@ class WelcomeScreen {
         frame.add(fighterText, c);
 
         JTextField fighterBox = new JTextField();
-        fighterBox.setMinimumSize(new Dimension(100,30));
+        fighterBox.setMinimumSize(new Dimension(100, 30));
         c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.gridx = 1;
@@ -181,7 +179,7 @@ class WelcomeScreen {
         frame.add(merchantText, c);
 
         JTextField merchantBox = new JTextField();
-        merchantBox.setMinimumSize(new Dimension(100,30));
+        merchantBox.setMinimumSize(new Dimension(100, 30));
         c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.gridx = 1;
@@ -200,7 +198,7 @@ class WelcomeScreen {
         frame.add(engineerText, c);
 
         JTextField engineerBox = new JTextField();
-        engineerBox.setMinimumSize(new Dimension(100,30));
+        engineerBox.setMinimumSize(new Dimension(100, 30));
         c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.gridx = 1;
@@ -218,7 +216,7 @@ class WelcomeScreen {
         frame.add(nameText, c);
 
         JTextField nameBox = new JTextField();
-        nameBox.setMinimumSize(new Dimension(100,30));
+        nameBox.setMinimumSize(new Dimension(100, 30));
         c = new GridBagConstraints();
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.gridx = 1;
@@ -247,9 +245,8 @@ class WelcomeScreen {
                 merchant = Integer.parseInt(merchantBox.getText());
                 engineer = Integer.parseInt(engineerBox.getText());
                 name = nameBox.getText();
-            }
-            catch (Exception f) {
-                //%TODO: Sanitize Inputs
+            } catch (Exception f) {
+
             }
 
 
@@ -276,7 +273,6 @@ class WelcomeScreen {
     }
 
     private static void newGame(JFrame frame) {
-//        frame.setVisible(false);
         frame.dispose();
         frame = new JFrame("New Game");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

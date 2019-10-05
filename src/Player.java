@@ -58,13 +58,17 @@ public class Player {
         return engineer;
     }
 
-    public Player(String name, int pilot, int fighter, int merchant, int engineer, int skillPoints) {
+    public Player(String name, int pilot, int fighter, int merchant
+            , int engineer, int skillPoints) {
         if (name.isEmpty()) {
             name = "Trader Joe";
         }
         int allocations = pilot + fighter + merchant + engineer;
         if (allocations <= 0 || allocations > skillPoints) {
-            pilot = fighter = merchant = engineer = skillPoints / 4;
+            pilot = skillPoints / 4;
+            fighter = skillPoints / 4;
+            merchant = skillPoints / 4;
+            engineer = skillPoints / 4;
         }
         this.name = name;
         this.pilot = pilot;

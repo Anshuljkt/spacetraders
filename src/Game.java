@@ -2,8 +2,8 @@ public class Game {
 
     private String difficulty;
     private Player player;
-    private final String[] regionNames = {"John Land", "Mariaopolis", "Fordton", "Anshul Andromeda", "Star Cluster X"
-            , "Sun", "Earth", "Region 8", "Region 9", "Region 10"};
+    private final String[] regionNames = {"John Land", "Mariaopolis", "Fordton", "Anshul Andromeda"
+            , "Star Cluster X", "Sun", "Earth", "Region 8", "Region 9", "Region 10"};
     private Universe universe;
 
     public Game(String diff, Player player) {

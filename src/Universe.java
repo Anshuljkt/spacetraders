@@ -43,8 +43,8 @@ public class Universe {
 
             System.out.println(newX + " " + newY);
 
-            regions[i] = new Region(xCoords[i], yCoords[i]
-                    , TechLevel.getRandomTech(), regionNames[i]);
+            regions[i] = new Region(xCoords[i], yCoords[i], TechLevel.getRandomTech()
+                    , regionNames[i]);
         }
     }
 

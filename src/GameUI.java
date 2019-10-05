@@ -2,8 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class GameUI {
-    static private Game game;
-    static private int regDisplay = 0;
+    private static Game game;
+    private static int regDisplay = 0;
 
 
     public GameUI(Game game) {
