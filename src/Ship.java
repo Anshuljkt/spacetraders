@@ -1,22 +1,23 @@
-public class Ship {
-    private ShipType type;
+public enum Ship {
+    PRIUS(10, 100, 60),
+    CIVIC(10, 50, 100),
+    JETTA(12, 60, 100),
+    CAYENNE(20, 80, 125),
+    M3(17, 70, 150),
+    GWAGON(25, 90, 150),
+    MODELS(33,80,150),
+    HURACAN(25, 100, 175),
+    P1(30, 120, 200);
+
     private int cargoSpace;
     private int fuelCapacity;
     private int shipHealth;
 
-    public Ship(ShipType type, int cargoSpace, int fuelCapacity, int shipHealth) {
-        this.type = type;
+
+    Ship(int cargoSpace, int fuelCapacity, int shipHealth) {
         this.cargoSpace = cargoSpace;
         this.fuelCapacity = fuelCapacity;
         this.shipHealth = shipHealth;
-    }
-
-    public ShipType getType() {
-        return type;
-    }
-
-    public void setType(ShipType type) {
-        this.type = type;
     }
 
     public int getCargoSpace() {
@@ -42,4 +43,6 @@ public class Ship {
     public void setShipHealth(int shipHealth) {
         this.shipHealth = shipHealth;
     }
+
+
 }
