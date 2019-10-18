@@ -14,6 +14,7 @@ public enum Ship {
     private int shipHealth;
 
 
+
     Ship(int cargoSpace, int fuelCapacity, int shipHealth) {
         this.cargoSpace = cargoSpace;
         this.fuelCapacity = fuelCapacity;
