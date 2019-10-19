@@ -106,6 +106,8 @@ public class GameUI {
             regFocus.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
             distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
                     .findDistance(game.getPlayer()) + "</html>");
+            fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+                    .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
         });
 
         travelPanel.add(left, c);
@@ -124,6 +126,8 @@ public class GameUI {
             regFocus.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
             distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
                     .findDistance(game.getPlayer()) + "</html>");
+            fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+                    .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
         });
 
         travelPanel.add(right, c);
@@ -142,6 +146,8 @@ public class GameUI {
                 currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
                 distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
                         .findDistance(game.getPlayer()) + "</html>");
+                fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+                        .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
             }
 
         });
