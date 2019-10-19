@@ -154,6 +154,18 @@ public class GameUI {
 
         travelPanel.add(travelHere, c);
 
+        JButton tradeButton = new JButton("Trade");
+        c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 5;
+        tradeButton.addActionListener(e -> {
+            //trade actions
+            new MarketUI(game, game.getUniverse().getRegions()[regDisplay].getMarket());
+            MarketUI.openMarket();
+        });
+
+        travelPanel.add(tradeButton, c);
+
         c = new GridBagConstraints();
         c.gridy = 0;
         c.gridx = 2;
