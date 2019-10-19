@@ -134,10 +134,16 @@ public class GameUI {
         c.gridy = 4;
         //Travel Actions
         travelHere.addActionListener(e -> {
-            game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
-            currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
-            distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
-                    .findDistance(game.getPlayer()) + "</html>");
+            if (game.getPlayer().getFuel() >= game.getUniverse().getRegions()[regDisplay].findDistance(game.getPlayer())
+                    / game.getPlayer().getPilot()) {
+                game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
+                        .findDistance(game.getPlayer()) / game.getPlayer().getPilot());
+                game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
+                currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
+                distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
+                        .findDistance(game.getPlayer()) + "</html>");
+            }
+
         });
 
         travelPanel.add(travelHere, c);

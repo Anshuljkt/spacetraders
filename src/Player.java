@@ -98,6 +98,7 @@ public class Player {
         }
 
         ship = Ship.CIVIC;
+        fuel = ship.getFuelCapacity();
 
         this.name = name;
         this.pilot = pilot;
