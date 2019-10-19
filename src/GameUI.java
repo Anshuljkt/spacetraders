@@ -82,6 +82,16 @@ public class GameUI {
 
         travelPanel.add(distText, c);
 
+        JLabel fuelCostText = new JLabel();
+        String fuelCostTextDesc = "Fuel Cost: ";
+        fuelCostText.setHorizontalAlignment(JLabel.CENTER);
+        fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+                .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
+        c.gridx = 1;
+        c.gridy = 3;
+
+        travelPanel.add(fuelCostText, c);
+
         JButton left = new JButton("<");
         c = new GridBagConstraints();
         c.gridx = 0;
@@ -121,7 +131,8 @@ public class GameUI {
         JButton travelHere = new JButton("Travel Here");
         c = new GridBagConstraints();
         c.gridx = 1;
-        c.gridy = 3;
+        c.gridy = 4;
+        //Travel Actions
         travelHere.addActionListener(e -> {
             game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
             currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());

@@ -8,6 +8,8 @@ public class Player {
     private int credits;
     private int skillPoints;
     private Region region;
+    private int fuel;
+    private Ship ship;
 
 
     public String getName() {
@@ -41,6 +43,14 @@ public class Player {
     public void setRegion(Region region) {
         this.region = region;
     }
+
+    public int getFuel() { return fuel; }
+
+    public void setFuel(int fuel) { this.fuel = fuel; }
+
+    public Ship getShip() { return ship; }
+
+    public void setShip(Ship ship) { this.ship = ship; }
 
     public int getPilot() {
         return pilot;
@@ -86,6 +96,9 @@ public class Player {
             merchant = skillPoints / 4;
             engineer = skillPoints / 4;
         }
+
+        ship = Ship.CIVIC;
+
         this.name = name;
         this.pilot = pilot;
         this.fighter = fighter;
@@ -106,4 +119,19 @@ public class Player {
 
         return response;
     }
+
+    public void addFuel(int amount) {
+        int temp = fuel + amount;
+        int max = ship.getFuelCapacity();
+        if (temp > max) {
+            fuel = max;
+        } else {
+            fuel = temp;
+        }
+    }
+
+    public void subFuel(int amount) {
+        fuel -= amount;
+    }
+
 }
