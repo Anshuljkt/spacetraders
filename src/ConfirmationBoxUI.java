@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class ConfirmationBoxUI {
 
@@ -35,6 +36,55 @@ public class ConfirmationBoxUI {
         c.gridx = 2;
         c.gridy = 1;
         cancelButton.addActionListener(e -> {
+            frame.setVisible(false);
+        });
+
+        confirmationPanel.add(cancelButton, c);
+
+        c = new GridBagConstraints();
+        c.gridy = 0;
+        c.gridx = 2;
+        c.weightx = 1;
+        c.anchor = GridBagConstraints.CENTER;
+
+        frame.add(confirmationPanel, c);
+
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    public void confirmBox(String message, String buttonMessage, ActionListener e) {
+        JFrame frame = new JFrame();
+        frame.setSize(400, 100);
+        frame.setLayout(new GridBagLayout());
+        GridBagConstraints c = new GridBagConstraints();
+
+        JPanel confirmationPanel = new JPanel();
+        confirmationPanel.setLayout(new GridBagLayout());
+
+        JLabel mark = new JLabel(message);
+        c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 0;
+
+        confirmationPanel.add(mark, c);
+
+        JButton confirmButton = new JButton(buttonMessage);
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 1;
+        confirmButton.addActionListener(e);
+        confirmButton.addActionListener(a -> {
+            frame.setVisible(false);
+        });
+
+        confirmationPanel.add(confirmButton, c);
+
+        JButton cancelButton = new JButton("Cancel");
+        c = new GridBagConstraints();
+        c.gridx = 2;
+        c.gridy = 1;
+        cancelButton.addActionListener(a -> {
             frame.setVisible(false);
         });
 

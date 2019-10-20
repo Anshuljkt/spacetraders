@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class GameUI {
     private static Game game;
@@ -185,6 +186,8 @@ public class GameUI {
             if (game.getPlayer().getFuel() >= game
                     .getUniverse().getRegions()[regDisplay].findDistance()
                     / game.getPlayer().getPilot()) {
+                ConfirmationBoxUI travelConf = new ConfirmationBoxUI();
+                travelConf.confirmBox("Are you sure you'd like to travel here?", "Yes", ActionListener -> {
                 game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
                         .findDistance() / game.getPlayer().getPilot());
                 game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
@@ -197,7 +200,7 @@ public class GameUI {
                         .findDistance() / game.getPlayer().getPilot()) + "</html>");
                 playerInfo.setListData(game.getPlayer().toArray());
                 shipList.setListData(Player.getShip().toArray());
-                Player.adjustInvPricing();
+                Player.adjustInvPricing();});
             } else {
                 ConfirmationBoxUI notEnoughFuel = new ConfirmationBoxUI();
                 notEnoughFuel.confirmBox("You don't have the fuel to travel here.", "Ok");
