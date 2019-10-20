@@ -21,8 +21,8 @@ public class Market {
         }
 
         ship = Ship.getRandomShip();
-        goods.add(new Item("Ship", 1000 * (techLevel.priceAdjust + priceAdjust)
-                , 1000 * (techLevel.priceAdjust - priceAdjust)
+        goods.add(new Item("Ship", 1000 * (techLevel.getPriceAdjust() + priceAdjust)
+                , 1000 * (techLevel.getPriceAdjust() - priceAdjust)
                 , 1000, 0, TechLevel.PREAGRICULTURAL));
 
         fuelForSale = random.nextInt(120);

@@ -202,9 +202,9 @@ public class Player {
     public static void adjustInvPricing() {
         for (Item i: inventory) {
             i.setBuyPrice(i.getBase() * (region.getTechLevel()
-                    .priceAdjust + region.getPriceAdjust()));
+                    .getPriceAdjust() + region.getPriceAdjust()));
             i.setSellPrice(i.getBase() * (region.getTechLevel()
-                    .priceAdjust - region.getPriceAdjust()));
+                    .getPriceAdjust() - region.getPriceAdjust()));
         }
     }
 

@@ -8,8 +8,8 @@ public class ShipUpgrade extends Item {
         this.setBase(shipUpgradeType.getPrice());
         this.setTechLevel(shipUpgradeType.getTechLevel());
         this.setName(shipUpgradeType.getName());
-        this.setBuyPrice(this.getBase() * (techLevel.priceAdjust + priceAdjust));
-        this.setSellPrice(this.getBase() * (techLevel.priceAdjust - priceAdjust));
+        this.setBuyPrice(this.getBase() * (techLevel.getPriceAdjust() + priceAdjust));
+        this.setSellPrice(this.getBase() * (techLevel.getPriceAdjust() - priceAdjust));
         this.setCargoSpace(shipUpgradeType.getCargoSpaceUsed());
     }
 
