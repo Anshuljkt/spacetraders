@@ -159,7 +159,7 @@ public class Player {
         return response;
     }
 
-    public int getInvSize() {
+    public static int getInvSize() {
         return inventory.size();
     }
 
@@ -199,6 +199,12 @@ public class Player {
         return inventory.get(num);
     }
 
+    public static void adjustInvPricing() {
+        for (Item i: inventory) {
+            i.setBuyPrice(i.getBase() * (region.getTechLevel().priceAdjust + region.getPriceAdjust()));
+            i.setSellPrice(i.getBase() * (region.getTechLevel().priceAdjust - region.getPriceAdjust()));
+        }
+    }
 
 
 }

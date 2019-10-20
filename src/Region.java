@@ -31,6 +31,10 @@ public class Region {
         return y;
     }
 
+    public TechLevel getTechLevel() {
+        return this.techLevel;
+    }
+
     public String getName() {
         return name;
     }
@@ -51,5 +55,9 @@ public class Region {
     private void calcPriceAdjust(int merchantSkill) {
         Random random = new Random();
         priceAdjust = Math.random() / 4 / merchantSkill;
+    }
+
+    public double getPriceAdjust() {
+        return priceAdjust;
     }
 }

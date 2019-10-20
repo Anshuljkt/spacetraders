@@ -190,6 +190,7 @@ public class GameUI {
                         .findDistance() / game.getPlayer().getPilot()) + "</html>");
                 playerInfo.setListData(game.getPlayer().toArray());
                 shipList.setListData(Player.getShip().toArray());
+                Player.adjustInvPricing();
             } else {
                 ConfirmationBoxUI notEnoughFuel = new ConfirmationBoxUI();
                 notEnoughFuel.ConfirmBox("You don't have the fuel to travel here. :(", "Ok");

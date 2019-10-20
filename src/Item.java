@@ -3,15 +3,17 @@ public class Item {
     private String name;
     private double sellPrice;
     private double buyPrice;
+    private int base;
     private int cargoSpace;
     private TechLevel techLevel;
 
-    public Item(String name, double buyPrice, double sellPrice, int cargoSpace, TechLevel techLevel) {
+    public Item(String name, double buyPrice, double sellPrice, int base, int cargoSpace, TechLevel techLevel) {
         this.name = name;
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;
         this.cargoSpace = cargoSpace;
         this.techLevel = techLevel;
+        this.base = base;
     }
 
     public Item() {
@@ -61,5 +63,13 @@ public class Item {
 
     public void setTechLevel(TechLevel techLevel) {
         this.techLevel = techLevel;
+    }
+
+    public int getBase() {
+        return base;
+    }
+
+    public void setBase(int base) {
+        this.base = base;
     }
 }
