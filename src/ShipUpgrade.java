@@ -1,6 +1,6 @@
 public class ShipUpgrade extends Item {
 
-    ShipUpgradeType shipUpgradeType;
+    private ShipUpgradeType shipUpgradeType;
 
     public ShipUpgrade(TechLevel techLevel, double priceAdjust) {
         super();
@@ -11,5 +11,13 @@ public class ShipUpgrade extends Item {
         this.setBuyPrice(this.getBase() * (techLevel.priceAdjust + priceAdjust));
         this.setSellPrice(this.getBase() * (techLevel.priceAdjust - priceAdjust));
         this.setCargoSpace(shipUpgradeType.getCargoSpaceUsed());
+    }
+
+    public ShipUpgradeType getShipUpgradeType() {
+        return shipUpgradeType;
+    }
+
+    public void setShipUpgradeType(ShipUpgradeType shipUpgradeType) {
+        this.shipUpgradeType = shipUpgradeType;
     }
 }

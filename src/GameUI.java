@@ -95,7 +95,8 @@ public class GameUI {
         frame.add(curRegPanel, c);
     }
 
-    private static void travelPanel(JList regFocus, JList currReg, JList playerInfo, JList shipList) {
+    private static void travelPanel(JList regFocus, JList currReg,
+                                    JList playerInfo, JList shipList) {
         JPanel travelPanel = new JPanel();
         travelPanel.setLayout(new GridBagLayout());
 
@@ -125,7 +126,8 @@ public class GameUI {
         JLabel fuelCostText = new JLabel();
         String fuelCostTextDesc = "Fuel Cost: ";
         fuelCostText.setHorizontalAlignment(JLabel.CENTER);
-        fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+        fuelCostText.setText("<html>" + fuelCostTextDesc + (game
+                .getUniverse().getRegions()[regDisplay]
                 .findDistance() / game.getPlayer().getPilot()) + "</html>");
         c.gridx = 1;
         c.gridy = 3;
@@ -146,7 +148,8 @@ public class GameUI {
             regFocus.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
             distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
                     .findDistance() + "</html>");
-            fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+            fuelCostText.setText("<html>" + fuelCostTextDesc + (game
+                    .getUniverse().getRegions()[regDisplay]
                     .findDistance() / game.getPlayer().getPilot()) + "</html>");
         });
 
@@ -166,7 +169,8 @@ public class GameUI {
             regFocus.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
             distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
                     .findDistance() + "</html>");
-            fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+            fuelCostText.setText("<html>" + fuelCostTextDesc + (game
+                    .getUniverse().getRegions()[regDisplay]
                     .findDistance() / game.getPlayer().getPilot()) + "</html>");
         });
 
@@ -178,22 +182,25 @@ public class GameUI {
         c.gridy = 4;
         //Travel Actions
         travelHere.addActionListener(e -> {
-            if (game.getPlayer().getFuel() >= game.getUniverse().getRegions()[regDisplay].findDistance()
+            if (game.getPlayer().getFuel() >= game
+                    .getUniverse().getRegions()[regDisplay].findDistance()
                     / game.getPlayer().getPilot()) {
                 game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
                         .findDistance() / game.getPlayer().getPilot());
                 game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
                 currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
-                distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
+                distText.setText("<html>" + distTextDesc + game
+                        .getUniverse().getRegions()[regDisplay]
                         .findDistance() + "</html>");
-                fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
+                fuelCostText.setText("<html>" + fuelCostTextDesc + (game
+                        .getUniverse().getRegions()[regDisplay]
                         .findDistance() / game.getPlayer().getPilot()) + "</html>");
                 playerInfo.setListData(game.getPlayer().toArray());
                 shipList.setListData(Player.getShip().toArray());
                 Player.adjustInvPricing();
             } else {
                 ConfirmationBoxUI notEnoughFuel = new ConfirmationBoxUI();
-                notEnoughFuel.ConfirmBox("You don't have the fuel to travel here. :(", "Ok");
+                notEnoughFuel.confirmBox("You don't have the fuel to travel here.", "Ok");
             }
         });
 

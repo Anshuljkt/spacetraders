@@ -140,10 +140,10 @@ public class MarketUI {
         c.gridx = 1;
         c.gridy = 2;
         buyButton.addActionListener(e -> {
-            if(market.getGoodBuyPrice(regDisplayMark) <= game.getPlayer().getCredits()) {
-                if(market.getGoodCargo(regDisplayMark) <= game.getPlayer().getCargoLeft()) {
+            if (market.getGoodBuyPrice(regDisplayMark) <= game.getPlayer().getCredits()) {
+                if (market.getGoodCargo(regDisplayMark) <= game.getPlayer().getCargoLeft()) {
                     game.getPlayer().subCargoLeft(market.getGoodCargo(regDisplayMark));
-                    game.getPlayer().subCredits((int)market.getGoodBuyPrice(regDisplayMark));
+                    game.getPlayer().subCredits((int) market.getGoodBuyPrice(regDisplayMark));
                     System.out.println(Player.getCredits());
                     game.getPlayer().addInv(market.removeGood(regDisplayMark));
                     if (regDisplayMark >= market.getGoodsLength() && market.getGoodsLength() != 0) {
@@ -155,11 +155,11 @@ public class MarketUI {
                     regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
                 } else {
                     ConfirmationBoxUI notEnoughSpace = new ConfirmationBoxUI();
-                    notEnoughSpace.ConfirmBox("Not enough space to purchase", "Ok");
+                    notEnoughSpace.confirmBox("Not enough space to purchase", "Ok");
                 }
             } else {
                 ConfirmationBoxUI notEnoughMoney = new ConfirmationBoxUI();
-                notEnoughMoney.ConfirmBox("Not enough money to purchase", "Ok");
+                notEnoughMoney.confirmBox("Not enough money to purchase", "Ok");
             }
         });
 
@@ -172,8 +172,10 @@ public class MarketUI {
         c.gridy = 2;
         sellButton.addActionListener(e -> {
             if (game.getPlayer().getInvSize() > 0) {
-                game.getPlayer().addCargoLeft(game.getPlayer().getItem(regDisplayPlayer).getCargoSpace());
-                game.getPlayer().addCredits((int)game.getPlayer().getItem(regDisplayPlayer).getSellPrice());
+                game.getPlayer().addCargoLeft(game
+                        .getPlayer().getItem(regDisplayPlayer).getCargoSpace());
+                game.getPlayer().addCredits((int) game
+                        .getPlayer().getItem(regDisplayPlayer).getSellPrice());
                 System.out.println(Player.getCredits());
                 market.addGood(game.getPlayer().subInv(regDisplayPlayer));
                 if (regDisplayPlayer >= Player.getInvSize() && Player.getInvSize() != 0) {

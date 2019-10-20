@@ -3,7 +3,7 @@ import java.awt.*;
 
 public class ConfirmationBoxUI {
 
-    public void ConfirmBox(String message, String buttonMessage) {
+    public void confirmBox(String message, String buttonMessage) {
         JFrame frame = new JFrame();
         frame.setSize(400, 100);
         frame.setLayout(new GridBagLayout());

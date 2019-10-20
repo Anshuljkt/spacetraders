@@ -3,8 +3,7 @@ public class Game {
     private static String difficulty;
     private static Player player;
     private static final String[] REGION_NAMES = {"John Land", "Mariaopolis", "Fordton"
-            , "Anshul Andromeda"
-            , "Xandar", "Coruscant", "Knowhere", "The Death Star", "Space 2"
+            , "Anshul Andromeda", "Xandar", "Coruscant", "Knowhere", "The Death Star", "Space 2"
             , "Region McRegionFace", "Star Bar", "Kennedy Space Port", "Whiteclaw Cluster"};
     private static Universe universe;
 

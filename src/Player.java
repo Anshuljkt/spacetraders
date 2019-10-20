@@ -153,7 +153,7 @@ public class Player {
             response[0] = "Empty";
         } else {
             response[0] = inventory.get(invNum).getName();
-            response[1] = (int)inventory.get(invNum).getSellPrice() + " credits";
+            response[1] = (int) inventory.get(invNum).getSellPrice() + " credits";
             response[2] = inventory.get(invNum).getCargoSpace() + " space used";
         }
         return response;
@@ -201,8 +201,10 @@ public class Player {
 
     public static void adjustInvPricing() {
         for (Item i: inventory) {
-            i.setBuyPrice(i.getBase() * (region.getTechLevel().priceAdjust + region.getPriceAdjust()));
-            i.setSellPrice(i.getBase() * (region.getTechLevel().priceAdjust - region.getPriceAdjust()));
+            i.setBuyPrice(i.getBase() * (region.getTechLevel()
+                    .priceAdjust + region.getPriceAdjust()));
+            i.setSellPrice(i.getBase() * (region.getTechLevel()
+                    .priceAdjust - region.getPriceAdjust()));
         }
     }
 

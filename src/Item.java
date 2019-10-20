@@ -7,7 +7,8 @@ public class Item {
     private int cargoSpace;
     private TechLevel techLevel;
 
-    public Item(String name, double buyPrice, double sellPrice, int base, int cargoSpace, TechLevel techLevel) {
+    public Item(String name, double buyPrice, double sellPrice
+            , int base, int cargoSpace, TechLevel techLevel) {
         this.name = name;
         this.buyPrice = buyPrice;
         this.sellPrice = sellPrice;

@@ -8,8 +8,8 @@ public enum ShipUpgradeType {
     TRACKINGMISSILE(3, 0, 0, 40, TechLevel.RENAISSANCE, "Tracking Missile", 400),
     DUELLASER(2, 0, 0, 40, TechLevel.INDUSTRIAL, "Duel Laser", 300),
     PHOTONCANNON(6, 0, 0, 65, TechLevel.MODERN, "Photon Cannon", 1000),
-    CARDBOARDARMOR(4,0, 0, 0, TechLevel.PREAGRICULTURAL, "Cardboard Armor", 5),
-    NERFGUN(2,0,0,15, TechLevel.AGRICULTURE, "Nerf Gun", 50),
+    CARDBOARDARMOR(4, 0, 0, 0, TechLevel.PREAGRICULTURAL, "Cardboard Armor", 5),
+    NERFGUN(2, 0, 0, 15, TechLevel.AGRICULTURE, "Nerf Gun", 50),
     MICROVERSEBATTERY(3, 500, 0, 0, TechLevel.FUTURISTIC, "Microverse Battery", 2500);
 
     private int cargoSpaceUsed;
@@ -20,7 +20,8 @@ public enum ShipUpgradeType {
     private String name;
     private int price;
 
-    ShipUpgradeType(int cargoSpaceUsed, int fuelCapacity, int shipHealth, int weaponDamage, TechLevel techLevel, String name, int price) {
+    ShipUpgradeType(int cargoSpaceUsed, int fuelCapacity, int shipHealth
+            , int weaponDamage, TechLevel techLevel, String name, int price) {
         this.cargoSpaceUsed = cargoSpaceUsed;
         this.fuelCapacity = fuelCapacity;
         this.shipHealth = shipHealth;
@@ -54,11 +55,17 @@ public enum ShipUpgradeType {
         this.shipHealth = shipHealth;
     }
 
-    public int getWeaponDamage() { return weaponDamage; }
+    public int getWeaponDamage() {
+        return weaponDamage;
+    }
 
-    public void setWeaponDamage(int weaponDamage) { this.weaponDamage = weaponDamage; }
+    public void setWeaponDamage(int weaponDamage) {
+        this.weaponDamage = weaponDamage;
+    }
 
-    public TechLevel getTechLevel() { return techLevel; }
+    public TechLevel getTechLevel() {
+        return techLevel;
+    }
 
     public static ShipUpgradeType getRandomUpgrade(TechLevel techLevel) {
         Random random = new Random();
