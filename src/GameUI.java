@@ -40,8 +40,8 @@ public class GameUI {
         JPanel shipPanel = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.NORTH;
-        c.gridx = 0;
-        c.gridy = 1;
+        c.gridx = 1;
+        c.gridy = 0;
         c.weightx = .33;
         shipPanel.add(shipList);
         frame.add(shipPanel, c);
@@ -89,8 +89,9 @@ public class GameUI {
 
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.NORTH;
-        c.gridx = 1;
-        c.gridy = 0;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.ipady = 20;
         c.weightx = .33;
 
         frame.add(curRegPanel, c);
@@ -208,9 +209,10 @@ public class GameUI {
         });
 
         travelPanel.add(travelHere, c);
-        c.gridy = 0;
-        c.gridx = 2;
+        c.gridy = 1;
+        c.gridx = 1;
         c.weightx = .33;
+        c.ipady = 10;
         c.anchor = GridBagConstraints.NORTH;
 
         frame.add(travelPanel, c);
