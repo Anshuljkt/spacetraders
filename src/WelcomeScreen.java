@@ -267,7 +267,7 @@ class WelcomeScreen {
 
     private static void newGame(JFrame frame) {
         frame.dispose();
-        frame = new JFrame("New Game");
+        frame = new JFrame("Character");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(400, 300);
         frame.setLayout(new GridBagLayout());

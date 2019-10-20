@@ -2,18 +2,18 @@ import java.util.ArrayList;
 
 @SuppressWarnings("CanBeFinal")
 public class Player {
-    private String name;
-    private int pilot;
-    private int fighter;
-    private int merchant;
-    private int engineer;
-    private int credits;
-    private int skillPoints;
-    private Region region;
-    private int fuel;
-    private Ship ship;
-    private ArrayList<Item> inventory;
-    private int cargoLeft;
+    private static String name;
+    private static int pilot;
+    private static int fighter;
+    private static int merchant;
+    private static int engineer;
+    private static int credits;
+    private static int skillPoints;
+    private static Region region;
+    private static int fuel;
+    private static Ship ship;
+    private static ArrayList<Item> inventory;
+    private static int cargoLeft;
 
 
     public String getName() {
@@ -21,7 +21,7 @@ public class Player {
     }
 
     public void setName(String name) {
-        this.name = name;
+        Player.name = name;
     }
 
     public int getCredits() {
@@ -29,7 +29,7 @@ public class Player {
     }
 
     public void setCredits(int credits) {
-        this.credits = credits;
+        Player.credits = credits;
     }
 
     public int getSkillPoints() {
@@ -37,7 +37,7 @@ public class Player {
     }
 
     public void setSkillPoints(int skillPoints) {
-        this.skillPoints = skillPoints;
+        Player.skillPoints = skillPoints;
     }
 
     public Region getRegion() {
@@ -45,23 +45,27 @@ public class Player {
     }
 
     public void setRegion(Region region) {
-        this.region = region;
+        Player.region = region;
     }
 
-    public int getFuel() { return fuel; }
+    public int getFuel() {
+        return fuel; }
 
-    public void setFuel(int fuel) { this.fuel = fuel; }
+    public void setFuel(int fuel) {
+        Player.fuel = fuel; }
 
-    public Ship getShip() { return ship; }
+    public Ship getShip() {
+        return ship; }
 
-    public void setShip(Ship ship) { this.ship = ship; }
+    public void setShip(Ship ship) {
+        Player.ship = ship; }
 
     public int getPilot() {
         return pilot;
     }
 
     public void setPilot(int pilot) {
-        this.pilot = pilot;
+        Player.pilot = pilot;
     }
 
     public int getFighter() {
@@ -69,7 +73,7 @@ public class Player {
     }
 
     public void setFighter(int fighter) {
-        this.fighter = fighter;
+        Player.fighter = fighter;
     }
 
     public int getMerchant() {
@@ -77,7 +81,7 @@ public class Player {
     }
 
     public void setMerchant(int merchant) {
-        this.merchant = merchant;
+        Player.merchant = merchant;
     }
 
     public int getEngineer() {
@@ -85,7 +89,7 @@ public class Player {
     }
 
     public void setEngineer(int engineer) {
-        this.engineer = engineer;
+        Player.engineer = engineer;
     }
 
 
@@ -108,12 +112,12 @@ public class Player {
 
         inventory = new ArrayList<Item>();
 
-        this.name = name;
-        this.pilot = pilot;
-        this.fighter = fighter;
-        this.merchant = merchant;
-        this.engineer = engineer;
-        this.skillPoints = skillPoints;
+        Player.name = name;
+        Player.pilot = pilot;
+        Player.fighter = fighter;
+        Player.merchant = merchant;
+        Player.engineer = engineer;
+        Player.skillPoints = skillPoints;
 
     }
 

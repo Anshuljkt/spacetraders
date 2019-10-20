@@ -14,7 +14,7 @@ public class MarketUI {
     }
 
     static void openMarket() {
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("" + game.getPlayer().getRegion().getName() + " Market");
         frame.setSize(500, 300);
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();

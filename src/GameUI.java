@@ -7,12 +7,12 @@ public class GameUI {
 
 
     public GameUI(Game game) {
-        this.game = game;
+        GameUI.game = game;
     }
 
     static void playGame() {
 
-        JFrame frame = new JFrame();
+        JFrame frame = new JFrame("Space Trader");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(800, 600);
         frame.setLayout(new GridBagLayout());
@@ -157,14 +157,14 @@ public class GameUI {
         JButton tradeButton = new JButton("Trade");
         c = new GridBagConstraints();
         c.gridx = 1;
-        c.gridy = 5;
+        c.gridy = 2;
         tradeButton.addActionListener(e -> {
             //trade actions
-            new MarketUI(game, game.getUniverse().getRegions()[regDisplay].getMarket());
+            new MarketUI(game, game.getPlayer().getRegion().getMarket());
             MarketUI.openMarket();
         });
 
-        travelPanel.add(tradeButton, c);
+        frame.add(tradeButton, c);
 
         c = new GridBagConstraints();
         c.gridy = 0;

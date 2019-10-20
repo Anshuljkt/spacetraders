@@ -31,6 +31,10 @@ public class Region {
         return y;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public String[] toArray() {
         String[] response = new String[7];
         response[0] = "Name: " + name;

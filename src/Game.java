@@ -1,16 +1,19 @@
 public class Game {
 
-    private String difficulty;
-    private Player player;
-    private final String[] regionNames = {"John Land", "Mariaopolis", "Fordton", "Anshul Andromeda"
+    private static String difficulty;
+    private static Player player;
+    private static final String[] REGION_NAMES = {"John Land", "Mariaopolis", "Fordton"
+            , "Anshul Andromeda"
             , "Xandar", "Coruscant", "Knowhere", "The Death Star", "Space 2"
             , "Region McRegionFace", "Star Bar", "Kennedy Space Port", "Whiteclaw Cluster"};
-    private Universe universe;
+    private static Universe universe;
+    private static GameUI gameUi;
+    private static MarketUI marketUi;
 
     public Game(String diff, Player player) {
-        this.difficulty = diff;
-        this.player = player;
-        this.universe = new Universe(regionNames, player.getMerchant());
+        Game.difficulty = diff;
+        Game.player = player;
+        Game.universe = new Universe(REGION_NAMES, player.getMerchant());
         player.setRegion(universe.getRandomRegion());
     }
 
@@ -19,7 +22,7 @@ public class Game {
     }
 
     public void setPlayer(Player player) {
-        this.player = player;
+        Game.player = player;
     }
 
     public String getDifficulty() {
@@ -27,14 +30,30 @@ public class Game {
     }
 
     public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
+        Game.difficulty = difficulty;
     }
 
     public String[] getRegionNames() {
-        return regionNames;
+        return REGION_NAMES;
     }
 
     public Universe getUniverse() {
         return universe;
+    }
+
+    public static GameUI getGameUi() {
+        return gameUi;
+    }
+
+    public static MarketUI getMarketUi() {
+        return marketUi;
+    }
+
+    public static void setGameUi(GameUI gameUi) {
+        Game.gameUi = gameUi;
+    }
+
+    public static void setMarketUi(MarketUI marketUi) {
+        Game.marketUi = marketUi;
     }
 }
