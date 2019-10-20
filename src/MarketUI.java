@@ -146,10 +146,10 @@ public class MarketUI {
                     game.getPlayer().subCredits((int)market.getGoodBuyPrice(regDisplayMark));
                     System.out.println(Player.getCredits());
                     game.getPlayer().addInv(market.removeGood(regDisplayMark));
-                    if (regDisplayMark == 0) {
+                    if (regDisplayMark >= market.getGoodsLength() && market.getGoodsLength() != 0) {
                         regDisplayMark = market.getGoodsLength() - 1;
                     } else {
-                        regDisplayMark--;
+                        regDisplayMark = 0;
                     }
                     regFocus.setListData(market.toArray(regDisplayMark));
                     regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
@@ -176,10 +176,10 @@ public class MarketUI {
                 game.getPlayer().addCredits((int)game.getPlayer().getItem(regDisplayPlayer).getSellPrice());
                 System.out.println(Player.getCredits());
                 market.addGood(game.getPlayer().subInv(regDisplayPlayer));
-                if (regDisplayPlayer == game.getPlayer().getInvSize() - 1) {
-                    regDisplayPlayer = 0;
+                if (regDisplayPlayer >= Player.getInvSize() && Player.getInvSize() != 0) {
+                    regDisplayPlayer = Player.getInvSize() - 1;
                 } else {
-                    regDisplayPlayer++;
+                    regDisplayPlayer = 0;
                 }
                 regFocus.setListData(market.toArray(regDisplayMark));
                 regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));

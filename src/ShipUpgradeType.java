@@ -7,7 +7,10 @@ public enum ShipUpgradeType {
     ADVSHIELD(2, 0, 50, 0, TechLevel.MEDIEVAL, "Advanced Shield", 100),
     TRACKINGMISSILE(3, 0, 0, 40, TechLevel.RENAISSANCE, "Tracking Missile", 400),
     DUELLASER(2, 0, 0, 40, TechLevel.INDUSTRIAL, "Duel Laser", 300),
-    PHOTONCANNON(6, 0, 0, 65, TechLevel.MODERN, "Photon Cannon", 1000);
+    PHOTONCANNON(6, 0, 0, 65, TechLevel.MODERN, "Photon Cannon", 1000),
+    CARDBOARDARMOR(4,0, 0, 0, TechLevel.PREAGRICULTURAL, "Cardboard Armor", 5),
+    NERFGUN(2,0,0,15, TechLevel.AGRICULTURE, "Nerf Gun", 50),
+    MICROVERSEBATTERY(3, 500, 0, 0, TechLevel.FUTURISTIC, "Microverse Battery", 2500);
 
     private int cargoSpaceUsed;
     private int fuelCapacity;
