@@ -25,6 +25,12 @@ public class MarketUI {
 
         //Market Panel
 
+        JList playerInfo = new JList(Player.toArray());
+        playerPanel(playerInfo);
+
+        JList shipList = new JList(Player.getShip().toArray());
+        shipPanel(shipList);
+
         JPanel marketPanel = new JPanel();
         marketPanel.setLayout(new GridBagLayout());
 
@@ -75,7 +81,7 @@ public class MarketUI {
         marketPanel.add(rightMark, c);
 
         c = new GridBagConstraints();
-        c.gridy = 0;
+        c.gridy = 1;
         c.gridx = 2;
         c.weightx = 1;
         c.anchor = GridBagConstraints.EAST;
@@ -153,6 +159,8 @@ public class MarketUI {
                     }
                     regFocus.setListData(market.toArray(regDisplayMark));
                     regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
+                    playerInfo.setListData(Player.toArray());
+                    shipList.setListData(Player.getShip().toArray());
                 } else {
                     ConfirmationBoxUI notEnoughSpace = new ConfirmationBoxUI();
                     notEnoughSpace.confirmBox("Not enough space to purchase", "Ok");
@@ -185,13 +193,15 @@ public class MarketUI {
                 }
                 regFocus.setListData(market.toArray(regDisplayMark));
                 regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
+                playerInfo.setListData(Player.toArray());
+                shipList.setListData(Player.getShip().toArray());
             }
         });
 
         playerPanel.add(sellButton, c);
 
         c = new GridBagConstraints();
-        c.gridy = 0;
+        c.gridy = 1;
         c.gridx = 0;
         c.weightx = 1;
         c.anchor = GridBagConstraints.WEST;
@@ -201,7 +211,7 @@ public class MarketUI {
         JButton doneButton = new JButton("Done");
         c = new GridBagConstraints();
         c.gridx = 1;
-        c.gridy = 1;
+        c.gridy = 2;
         doneButton.addActionListener(e -> {
             new GameUI(MarketUI.game);
             GameUI.playGame();
@@ -212,6 +222,28 @@ public class MarketUI {
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    private static void shipPanel(JList shipList) {
+        JPanel shipPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 2;
+        c.gridy = 0;
+        c.weightx = .33;
+        shipPanel.add(shipList);
+        frame.add(shipPanel, c);
+    }
+
+    private static void playerPanel(JList playerInfo) {
+        JPanel playerPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = .33;
+        playerPanel.add(playerInfo);
+        frame.add(playerInfo, c);
     }
 
     public static JFrame getFrame() {
