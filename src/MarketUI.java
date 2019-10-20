@@ -5,16 +5,20 @@ public class MarketUI {
 
     private static Game game;
     private static Market market;
-    private static int regDisplayMark = 0;
-    private static int regDisplayPlayer = 0;
+    private static int regDisplayMark;
+    private static int regDisplayPlayer;
+    private static JFrame frame;
 
     public MarketUI(Game game, Market market) {
         this.game = game;
         this.market = market;
+        regDisplayMark = 0;
+        regDisplayPlayer = 0;
     }
 
     static void openMarket() {
-        JFrame frame = new JFrame("" + game.getPlayer().getRegion().getName() + " Market");
+        frame = new JFrame("" + game.getPlayer().getRegion().getName() + " Market");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 300);
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
@@ -140,6 +144,7 @@ public class MarketUI {
                 if(market.getGoodCargo(regDisplayMark) <= game.getPlayer().getCargoLeft()) {
                     game.getPlayer().subCargoLeft(market.getGoodCargo(regDisplayMark));
                     game.getPlayer().subCredits(market.getGoodPrice(regDisplayMark));
+                    System.out.println(Player.getCredits());
                     game.getPlayer().addInv(market.removeGood(regDisplayMark));
                     if (regDisplayMark == 0) {
                         regDisplayMark = market.getGoodsLength() - 1;
@@ -169,6 +174,7 @@ public class MarketUI {
             if (game.getPlayer().getInvSize() > 0) {
                 game.getPlayer().addCargoLeft(game.getPlayer().getItem(regDisplayPlayer).getCargoSpace());
                 game.getPlayer().addCredits(game.getPlayer().getItem(regDisplayPlayer).getPrice());
+                System.out.println(Player.getCredits());
                 market.addGood(game.getPlayer().subInv(regDisplayPlayer));
                 if (regDisplayPlayer == game.getPlayer().getInvSize() - 1) {
                     regDisplayPlayer = 0;
@@ -184,14 +190,29 @@ public class MarketUI {
 
         c = new GridBagConstraints();
         c.gridy = 0;
-        c.gridx = 2;
+        c.gridx = 0;
         c.weightx = 1;
         c.anchor = GridBagConstraints.WEST;
 
         frame.add(playerPanel, c);
 
+        JButton doneButton = new JButton("Done");
+        c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 1;
+        doneButton.addActionListener(e -> {
+            new GameUI(MarketUI.game);
+            GameUI.playGame();
+            MarketUI.frame.setVisible(false);
+        });
+
+        frame.add(doneButton, c);
 
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
+    }
+
+    public static JFrame getFrame() {
+        return frame;
     }
 }

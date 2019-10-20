@@ -7,8 +7,6 @@ public class Game {
             , "Xandar", "Coruscant", "Knowhere", "The Death Star", "Space 2"
             , "Region McRegionFace", "Star Bar", "Kennedy Space Port", "Whiteclaw Cluster"};
     private static Universe universe;
-    private static GameUI gameUi;
-    private static MarketUI marketUi;
 
     public Game(String diff, Player player) {
         Game.difficulty = diff;
@@ -41,19 +39,4 @@ public class Game {
         return universe;
     }
 
-    public static GameUI getGameUi() {
-        return gameUi;
-    }
-
-    public static MarketUI getMarketUi() {
-        return marketUi;
-    }
-
-    public static void setGameUi(GameUI gameUi) {
-        Game.gameUi = gameUi;
-    }
-
-    public static void setMarketUi(MarketUI marketUi) {
-        Game.marketUi = marketUi;
-    }
 }

@@ -14,6 +14,7 @@ public enum Ship {
     private int cargoSpace;
     private int fuelCapacity;
     private int shipHealth;
+    private int shipHealthMax;
     private int weaponDamage;
 
 
@@ -21,6 +22,7 @@ public enum Ship {
     Ship(int cargoSpace, int fuelCapacity, int shipHealth, int weaponDamage) {
         this.cargoSpace = cargoSpace;
         this.fuelCapacity = fuelCapacity;
+        this.shipHealthMax = shipHealth;
         this.shipHealth = shipHealth;
         this.weaponDamage = weaponDamage;
     }
@@ -45,6 +47,10 @@ public enum Ship {
         return shipHealth;
     }
 
+    public int getShipHealthMax() {
+        return shipHealthMax;
+    }
+
     public void setShipHealth(int shipHealth) {
         this.shipHealth = shipHealth;
     }
@@ -56,6 +62,16 @@ public enum Ship {
     public static Ship getRandomShip() {
         Random random = new Random();
         return values()[random.nextInt(values().length)];
+    }
+
+    public String[] toArray() {
+        String[] response = new String[5];
+        response[0] = "Name: " + name();
+        response[1] = "Health: " + getShipHealth() + "/" + getShipHealthMax();
+        response[2] = "Fuel Tank: " + Player.getFuel() + "/" + getFuelCapacity();
+        response[3] = "Cargo Space: " +  (getCargoSpace() - Player.getCargoLeft()) + "/" + getCargoSpace();
+        response[4] = "Weapon Damage: " + getWeaponDamage();
+        return response;
     }
 
 }

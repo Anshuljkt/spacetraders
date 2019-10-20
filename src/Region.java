@@ -18,9 +18,9 @@ public class Region {
         market = new Market(techLevel, priceAdjust);
     }
 
-    public int findDistance(Player player) {
-        return (int) Math.sqrt(Math.pow(this.x - player.getRegion().getX(), 2)
-                + Math.pow(this.y - player.getRegion().getY(), 2));
+    public int findDistance() {
+        return (int) Math.sqrt(Math.pow(this.x - Player.getRegion().getX(), 2)
+                + Math.pow(this.y - Player.getRegion().getY(), 2));
     }
 
     public int getX() {

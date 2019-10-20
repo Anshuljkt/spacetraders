@@ -4,48 +4,87 @@ import java.awt.*;
 public class GameUI {
     private static Game game;
     private static int regDisplay = 0;
+    private static JFrame frame;
 
 
     public GameUI(Game game) {
         GameUI.game = game;
+        frame = new JFrame("Space Trader");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(800, 600);
+        frame.setLayout(new GridBagLayout());
     }
 
     static void playGame() {
 
-        JFrame frame = new JFrame("Space Trader");
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(800, 600);
-        frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JPanel playerPanel = new JPanel();
         JList playerInfo = new JList(game.getPlayer().toArray());
-        c = new GridBagConstraints();
+        playerPanel(playerInfo);
+
+        JList currReg = new JList(game.getPlayer().getRegion().toArray());
+        curRegPanel(currReg);
+
+        JList shipList = new JList(Player.getShip().toArray());
+        shipPanel(shipList);
+
+        JList regFocus = new JList(game.getUniverse().getRegions()[regDisplay].toArray());
+        travelPanel(regFocus, currReg, playerInfo, shipList);
+
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private static void shipPanel(JList shipList) {
+        JPanel shipPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 0;
+        c.gridy = 1;
+        c.weightx = .33;
+        shipPanel.add(shipList);
+        frame.add(shipPanel, c);
+    }
+
+    public static JFrame getFrame() {
+        return frame;
+    }
+
+    private static void playerPanel(JList playerInfo) {
+        JPanel playerPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.NORTH;
         c.gridx = 0;
         c.gridy = 0;
         c.weightx = .33;
-
         playerPanel.add(playerInfo);
         frame.add(playerInfo, c);
+    }
 
+    private static void curRegPanel(JList currReg) {
         JPanel curRegPanel = new JPanel();
         curRegPanel.setLayout(new GridBagLayout());
-
         JLabel current = new JLabel("Current Region: ");
-        c = new GridBagConstraints();
+        GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 0;
-
         curRegPanel.add(current, c);
-
-        JList currReg = new JList(game.getPlayer().getRegion().toArray());
-
         c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 1;
-
         curRegPanel.add(currReg, c);
+
+        JButton tradeButton = new JButton("Trade");
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 2;
+        tradeButton.addActionListener(e -> {
+            //trade actions
+            new MarketUI(game, game.getPlayer().getRegion().getMarket());
+            MarketUI.openMarket();
+            frame.setVisible(false);
+        });
+        curRegPanel.add(tradeButton, c);
 
         c = new GridBagConstraints();
         c.anchor = GridBagConstraints.NORTH;
@@ -54,18 +93,19 @@ public class GameUI {
         c.weightx = .33;
 
         frame.add(curRegPanel, c);
+    }
 
+    private static void travelPanel(JList regFocus, JList currReg, JList playerInfo, JList shipList) {
         JPanel travelPanel = new JPanel();
         travelPanel.setLayout(new GridBagLayout());
 
         JLabel travel = new JLabel("Regions:");
-        c = new GridBagConstraints();
+        GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 0;
 
         travelPanel.add(travel, c);
 
-        JList regFocus = new JList(game.getUniverse().getRegions()[regDisplay].toArray());
         c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 1;
@@ -138,44 +178,31 @@ public class GameUI {
         c.gridy = 4;
         //Travel Actions
         travelHere.addActionListener(e -> {
-            if (game.getPlayer().getFuel() >= game.getUniverse().getRegions()[regDisplay].findDistance(game.getPlayer())
+            if (game.getPlayer().getFuel() >= game.getUniverse().getRegions()[regDisplay].findDistance()
                     / game.getPlayer().getPilot()) {
                 game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
-                        .findDistance(game.getPlayer()) / game.getPlayer().getPilot());
+                        .findDistance() / game.getPlayer().getPilot());
                 game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
                 currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
                 distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
-                        .findDistance(game.getPlayer()) + "</html>");
+                        .findDistance() + "</html>");
                 fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
-                        .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
+                        .findDistance() / game.getPlayer().getPilot()) + "</html>");
+                playerInfo.setListData(game.getPlayer().toArray());
+                shipList.setListData(Player.getShip().toArray());
+            } else {
+                ConfirmationBoxUI notEnoughFuel = new ConfirmationBoxUI();
+                notEnoughFuel.ConfirmBox("You don't have the fuel to travel here. :(", "Ok");
             }
-
         });
 
         travelPanel.add(travelHere, c);
-
-        JButton tradeButton = new JButton("Trade");
-        c = new GridBagConstraints();
-        c.gridx = 1;
-        c.gridy = 2;
-        tradeButton.addActionListener(e -> {
-            //trade actions
-            new MarketUI(game, game.getPlayer().getRegion().getMarket());
-            MarketUI.openMarket();
-        });
-
-        frame.add(tradeButton, c);
-
-        c = new GridBagConstraints();
         c.gridy = 0;
         c.gridx = 2;
         c.weightx = .33;
         c.anchor = GridBagConstraints.NORTH;
 
         frame.add(travelPanel, c);
-
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 
 }

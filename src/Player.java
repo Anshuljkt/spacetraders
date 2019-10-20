@@ -24,7 +24,7 @@ public class Player {
         Player.name = name;
     }
 
-    public int getCredits() {
+    public static int getCredits() {
         return credits;
     }
 
@@ -40,7 +40,7 @@ public class Player {
         Player.skillPoints = skillPoints;
     }
 
-    public Region getRegion() {
+    public static Region getRegion() {
         return region;
     }
 
@@ -48,13 +48,13 @@ public class Player {
         Player.region = region;
     }
 
-    public int getFuel() {
+    public static int getFuel() {
         return fuel; }
 
     public void setFuel(int fuel) {
         Player.fuel = fuel; }
 
-    public Ship getShip() {
+    public static Ship getShip() {
         return ship; }
 
     public void setShip(Ship ship) {
@@ -108,7 +108,7 @@ public class Player {
 
         ship = Ship.CIVIC;
         fuel = ship.getFuelCapacity();
-        cargoLeft = ship.getFuelCapacity();
+        cargoLeft = ship.getCargoSpace();
 
         inventory = new ArrayList<Item>();
 
@@ -121,8 +121,8 @@ public class Player {
 
     }
 
-    public String[] toArray() {
-        String[] response = new String[7];
+    public static String[] toArray() {
+        String[] response = new String[6];
         response[0] = "Name: " + name;
         response[1] = "Pilot: " + pilot;
         response[2] = "Fighter: " + fighter;
@@ -163,7 +163,7 @@ public class Player {
         return inventory.size();
     }
 
-    public int getCargoLeft() {
+    public static int getCargoLeft() {
         return cargoLeft;
     }
 
@@ -198,5 +198,7 @@ public class Player {
     public Item getItem(int num) {
         return inventory.get(num);
     }
+
+
 
 }
