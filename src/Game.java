@@ -10,7 +10,7 @@ public class Game {
     public Game(String diff, Player player) {
         this.difficulty = diff;
         this.player = player;
-        this.universe = new Universe(regionNames);
+        this.universe = new Universe(regionNames, player.getMerchant());
         player.setRegion(universe.getRandomRegion());
     }
 

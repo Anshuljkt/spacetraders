@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Region {
 
     private int x;
@@ -5,14 +7,15 @@ public class Region {
     private TechLevel techLevel;
     private String name;
     private Market market;
+    private int priceAdjust;
 
-    public Region(int x, int y, TechLevel techLevel, String name) {
+    public Region(int x, int y, TechLevel techLevel, String name, int merchantSkill) {
         this.x = x;
         this.y = y;
         this.techLevel = techLevel;
         this.name = name;
-
-
+        calcPriceAdjust(merchantSkill);
+        market = new Market(techLevel, priceAdjust);
     }
 
     public int findDistance(Player player) {
@@ -39,5 +42,10 @@ public class Region {
 
     public Market getMarket() {
         return market;
+    }
+
+    private void calcPriceAdjust(int merchantSkill) {
+        Random random = new Random();
+        priceAdjust = techLevel.priceAdjust + random.nextInt(100) - (10 * merchantSkill);
     }
 }

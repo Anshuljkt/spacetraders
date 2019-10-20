@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public enum Ship {
     PRIUS(10, 100, 60, 15),
     CIVIC(10, 50, 100, 15),
@@ -51,5 +53,9 @@ public enum Ship {
 
     public void setWeaponDamage(int weaponDamage) { this.weaponDamage = weaponDamage; }
 
+    public static Ship getRandomShip() {
+        Random random = new Random();
+        return values()[random.nextInt(values().length)];
+    }
 
 }

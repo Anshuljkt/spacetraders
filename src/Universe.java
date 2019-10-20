@@ -7,7 +7,7 @@ public class Universe {
     private int[] xCoords;
     private int[] yCoords;
 
-    public Universe(String[] regionNames) {
+    public Universe(String[] regionNames, int merchantSkill) {
         xCoords = new int[regionNames.length];
         yCoords = new int[regionNames.length];
         int newX;
@@ -44,7 +44,7 @@ public class Universe {
             yCoords[i] = newY;
 
             regions[i] = new Region(xCoords[i], yCoords[i], TechLevel.getRandomTech()
-                    , regionNames[i]);
+                    , regionNames[i], merchantSkill);
         }
     }
 

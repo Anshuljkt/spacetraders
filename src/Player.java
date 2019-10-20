@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 @SuppressWarnings("CanBeFinal")
 public class Player {
     private String name;
@@ -10,6 +12,8 @@ public class Player {
     private Region region;
     private int fuel;
     private Ship ship;
+    private ArrayList<Item> inventory;
+    private int cargoLeft;
 
 
     public String getName() {
@@ -84,6 +88,7 @@ public class Player {
         this.engineer = engineer;
     }
 
+
     public Player(String name, int pilot, int fighter, int merchant
             , int engineer, int skillPoints) {
         if (name.isEmpty()) {
@@ -99,6 +104,9 @@ public class Player {
 
         ship = Ship.CIVIC;
         fuel = ship.getFuelCapacity();
+        cargoLeft = ship.getFuelCapacity();
+
+        inventory = new ArrayList<Item>();
 
         this.name = name;
         this.pilot = pilot;
@@ -133,6 +141,58 @@ public class Player {
 
     public void subFuel(int amount) {
         fuel -= amount;
+    }
+
+    public String[] invToArray(int invNum) {
+        String[] response = new String[7];
+        if ((inventory.size() - 1 < invNum) || invNum < 0) {
+            response[0] = "Empty";
+        } else {
+            response[0] = inventory.get(invNum).getName();
+            response[1] = inventory.get(invNum).getPrice() + " credits";
+            response[2] = inventory.get(invNum).getCargoSpace() + " space used";
+        }
+        return response;
+    }
+
+    public int getInvSize() {
+        return inventory.size();
+    }
+
+    public int getCargoLeft() {
+        return cargoLeft;
+    }
+
+    public void resetCargoLeft() {
+        cargoLeft = ship.getCargoSpace();
+    }
+
+    public void subCargoLeft(int val) {
+        cargoLeft -= val;
+    }
+
+    public void addCargoLeft(int val) {
+        cargoLeft += val;
+    }
+
+    public void addInv(Item item) {
+        inventory.add(item);
+    }
+
+    public Item subInv(int num) {
+        return inventory.remove(num);
+    }
+
+    public void subCredits(int amount) {
+        credits -= amount;
+    }
+
+    public void addCredits(int amount) {
+        credits += amount;
+    }
+
+    public Item getItem(int num) {
+        return inventory.get(num);
     }
 
 }

@@ -1,11 +1,63 @@
+import java.util.ArrayList;
+import java.util.Random;
+
 public class Market {
 
-    public Market(TechLevel techLevel) {
+    private Ship ship;
+    private int fuelForSale;
+    private ArrayList<Item> goods;
+
+    public Market(TechLevel techLevel, int priceAdjust) {
         //one ship
         //some fuel
-        //1 or more healables
         //1 or more ship upgrades
         //repair ship
+        Random random = new Random();
+        int numUpgrades = random.nextInt(5);
+        goods = new ArrayList<Item>();
+
+        for (int i = 0; i < numUpgrades; i++) {
+            goods.add(new ShipUpgrade(techLevel, priceAdjust));
+        }
+
+        ship = Ship.getRandomShip();
+        goods.add(new Item("Ship", 1000, 0, TechLevel.PREAGRICULTURAL));
+
+        fuelForSale = random.nextInt(120);
+        goods.add(new Item("Fuel", fuelForSale * 5, 0, TechLevel.PREAGRICULTURAL));
+
+    }
+
+    public String[] toArray(int goodNum) {
+        String[] response = new String[7];
+        if ((goods.size() - 1 < goodNum) || goodNum < 0) {
+            response[0] = "Empty";
+        } else {
+            response[0] = goods.get(goodNum).getName();
+            response[1] = goods.get(goodNum).getPrice() + " credits";
+            response[2] = goods.get(goodNum).getCargoSpace() + " space used";
+        }
+        return response;
+    }
+
+    public int getGoodsLength() {
+        return goods.size();
+    }
+
+    public Item removeGood(int goodNum) {
+        return goods.remove(goodNum);
+    }
+
+    public int getGoodPrice(int goodNum) {
+        return goods.get(goodNum).getPrice();
+    }
+
+    public int getGoodCargo(int goodNum) {
+        return goods.get(goodNum).getCargoSpace();
+    }
+
+    public void addGood(Item item) {
+        goods.add(item);
     }
 
 }
