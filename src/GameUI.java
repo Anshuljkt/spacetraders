@@ -116,7 +116,7 @@ public class GameUI {
         String distTextDesc = "Distance: ";
         distText.setHorizontalAlignment(JLabel.CENTER);
         distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
-                .findDistance(game.getPlayer()) + "</html>");
+                .findDistance() + "</html>");
         c.gridx = 1;
         c.gridy = 2;
 
@@ -126,7 +126,7 @@ public class GameUI {
         String fuelCostTextDesc = "Fuel Cost: ";
         fuelCostText.setHorizontalAlignment(JLabel.CENTER);
         fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
-                .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
+                .findDistance() / game.getPlayer().getPilot()) + "</html>");
         c.gridx = 1;
         c.gridy = 3;
 
@@ -145,9 +145,9 @@ public class GameUI {
             }
             regFocus.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
             distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
-                    .findDistance(game.getPlayer()) + "</html>");
+                    .findDistance() + "</html>");
             fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
-                    .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
+                    .findDistance() / game.getPlayer().getPilot()) + "</html>");
         });
 
         travelPanel.add(left, c);
@@ -165,9 +165,9 @@ public class GameUI {
             }
             regFocus.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
             distText.setText("<html>" + distTextDesc + game.getUniverse().getRegions()[regDisplay]
-                    .findDistance(game.getPlayer()) + "</html>");
+                    .findDistance() + "</html>");
             fuelCostText.setText("<html>" + fuelCostTextDesc + (game.getUniverse().getRegions()[regDisplay]
-                    .findDistance(game.getPlayer()) / game.getPlayer().getPilot()) + "</html>");
+                    .findDistance() / game.getPlayer().getPilot()) + "</html>");
         });
 
         travelPanel.add(right, c);

@@ -76,7 +76,7 @@ public class Player {
         Player.fighter = fighter;
     }
 
-    public int getMerchant() {
+    public static int getMerchant() {
         return merchant;
     }
 
@@ -153,7 +153,7 @@ public class Player {
             response[0] = "Empty";
         } else {
             response[0] = inventory.get(invNum).getName();
-            response[1] = inventory.get(invNum).getPrice() + " credits";
+            response[1] = (int)inventory.get(invNum).getSellPrice() + " credits";
             response[2] = inventory.get(invNum).getCargoSpace() + " space used";
         }
         return response;

@@ -1,20 +1,23 @@
 public class Item {
 
     private String name;
-    private int price;
+    private double sellPrice;
+    private double buyPrice;
     private int cargoSpace;
     private TechLevel techLevel;
 
-    public Item(String name, int price, int cargoSpace, TechLevel techLevel) {
+    public Item(String name, double buyPrice, double sellPrice, int cargoSpace, TechLevel techLevel) {
         this.name = name;
-        this.price = price;
+        this.buyPrice = buyPrice;
+        this.sellPrice = sellPrice;
         this.cargoSpace = cargoSpace;
         this.techLevel = techLevel;
     }
 
     public Item() {
         name = "Invalid";
-        price = 1;
+        buyPrice = 1;
+        sellPrice = 1;
         cargoSpace = 0;
         techLevel = TechLevel.getRandomTech();
     }
@@ -28,12 +31,20 @@ public class Item {
         this.name = name;
     }
 
-    public int getPrice() {
-        return price;
+    public double getBuyPrice() {
+        return buyPrice;
     }
 
-    public void setPrice(int price) {
-        this.price = price;
+    public void setBuyPrice(double buyPrice) {
+        this.buyPrice = buyPrice;
+    }
+
+    public double getSellPrice() {
+        return sellPrice;
+    }
+
+    public void setSellPrice(double sellPrice) {
+        this.sellPrice = sellPrice;
     }
 
     public int getCargoSpace() {

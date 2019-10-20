@@ -7,7 +7,7 @@ public class Market {
     private int fuelForSale;
     private ArrayList<Item> goods;
 
-    public Market(TechLevel techLevel, int priceAdjust) {
+    public Market(TechLevel techLevel, double priceAdjust) {
         //one ship
         //some fuel
         //1 or more ship upgrades
@@ -21,10 +21,10 @@ public class Market {
         }
 
         ship = Ship.getRandomShip();
-        goods.add(new Item("Ship", 1000, 0, TechLevel.PREAGRICULTURAL));
+        goods.add(new Item("Ship", 1000*(techLevel.priceAdjust + priceAdjust), 1000*(techLevel.priceAdjust - priceAdjust), 0, TechLevel.PREAGRICULTURAL));
 
         fuelForSale = random.nextInt(120);
-        goods.add(new Item("Fuel", fuelForSale * 5, 0, TechLevel.PREAGRICULTURAL));
+        goods.add(new Item("Fuel", fuelForSale * 5, fuelForSale*5, 0, TechLevel.PREAGRICULTURAL));
 
     }
 
@@ -34,7 +34,7 @@ public class Market {
             response[0] = "Empty";
         } else {
             response[0] = goods.get(goodNum).getName();
-            response[1] = goods.get(goodNum).getPrice() + " credits";
+            response[1] = (int)goods.get(goodNum).getBuyPrice() + " credits";
             response[2] = goods.get(goodNum).getCargoSpace() + " space used";
         }
         return response;
@@ -48,8 +48,8 @@ public class Market {
         return goods.remove(goodNum);
     }
 
-    public int getGoodPrice(int goodNum) {
-        return goods.get(goodNum).getPrice();
+    public double getGoodBuyPrice(int goodNum) {
+        return goods.get(goodNum).getBuyPrice();
     }
 
     public int getGoodCargo(int goodNum) {

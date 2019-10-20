@@ -1,12 +1,12 @@
 import java.util.Random;
 
 public enum TechLevel {
-    PREAGRICULTURAL(400), AGRICULTURE(350), MEDIEVAL(300), RENAISSANCE(200),
-    INDUSTRIAL(100), MODERN(50), FUTURISTIC(0);
+    PREAGRICULTURAL(2), AGRICULTURE(1.75), MEDIEVAL(1.6), RENAISSANCE(1.45),
+    INDUSTRIAL(1.3), MODERN(1.15), FUTURISTIC(1);
 
-    int priceAdjust;
+    double priceAdjust;
 
-    TechLevel(int priceAdjust) {
+    TechLevel(double priceAdjust) {
         this.priceAdjust = priceAdjust;
     }
 

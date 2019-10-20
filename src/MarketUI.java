@@ -140,10 +140,10 @@ public class MarketUI {
         c.gridx = 1;
         c.gridy = 2;
         buyButton.addActionListener(e -> {
-            if(market.getGoodPrice(regDisplayMark) <= game.getPlayer().getCredits()) {
+            if(market.getGoodBuyPrice(regDisplayMark) <= game.getPlayer().getCredits()) {
                 if(market.getGoodCargo(regDisplayMark) <= game.getPlayer().getCargoLeft()) {
                     game.getPlayer().subCargoLeft(market.getGoodCargo(regDisplayMark));
-                    game.getPlayer().subCredits(market.getGoodPrice(regDisplayMark));
+                    game.getPlayer().subCredits((int)market.getGoodBuyPrice(regDisplayMark));
                     System.out.println(Player.getCredits());
                     game.getPlayer().addInv(market.removeGood(regDisplayMark));
                     if (regDisplayMark == 0) {
@@ -173,7 +173,7 @@ public class MarketUI {
         sellButton.addActionListener(e -> {
             if (game.getPlayer().getInvSize() > 0) {
                 game.getPlayer().addCargoLeft(game.getPlayer().getItem(regDisplayPlayer).getCargoSpace());
-                game.getPlayer().addCredits(game.getPlayer().getItem(regDisplayPlayer).getPrice());
+                game.getPlayer().addCredits((int)game.getPlayer().getItem(regDisplayPlayer).getSellPrice());
                 System.out.println(Player.getCredits());
                 market.addGood(game.getPlayer().subInv(regDisplayPlayer));
                 if (regDisplayPlayer == game.getPlayer().getInvSize() - 1) {

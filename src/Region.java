@@ -7,7 +7,7 @@ public class Region {
     private TechLevel techLevel;
     private String name;
     private Market market;
-    private int priceAdjust;
+    private double priceAdjust;
 
     public Region(int x, int y, TechLevel techLevel, String name, int merchantSkill) {
         this.x = x;
@@ -50,6 +50,6 @@ public class Region {
 
     private void calcPriceAdjust(int merchantSkill) {
         Random random = new Random();
-        priceAdjust = techLevel.priceAdjust + random.nextInt(100) - (10 * merchantSkill);
+        priceAdjust = Math.random() / 4 / merchantSkill;
     }
 }
