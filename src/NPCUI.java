@@ -40,6 +40,26 @@ public class NPCUI {
         JPanel encounterPanel = new JPanel();
         encounterPanel.setLayout(new GridBagLayout());
 
+        JLabel encounterText = new JLabel("As you reach the jump point" +
+                " for the next region, you are hailed by a rogue bandit.");
+        c = new GridBagConstraints();
+        c.gridy = 2;
+        c.gridx = 0;
+        c.fill = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.CENTER;
+        c.weightx = 1;
+        frame.add(encounterText, c);
+        JLabel demandsText = new JLabel("The Bandit says: Give me your credits!");
+        c = new GridBagConstraints();
+        c.gridy = 3;
+        c.gridx = 0;
+        c.weightx = 1;
+        c.fill = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.CENTER;
+        frame.add(demandsText, c);
+
+        frame.setVisible(true);
+
     }
 
     //TODO
@@ -57,10 +77,10 @@ public class NPCUI {
     private static void playerPanel(JList playerInfo) {
         JPanel playerPanel = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.NORTH;
+//        c.anchor = GridBagConstraints.NORTH;
         c.gridx = 0;
         c.gridy = 0;
-        c.weightx = .33;
+        c.weightx = .5;
         playerPanel.add(playerInfo);
         frame.add(playerInfo, c);
     }
@@ -68,10 +88,10 @@ public class NPCUI {
     private static void shipPanel(JList shipList) {
         JPanel shipPanel = new JPanel();
         GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.NORTH;
-        c.gridx = 2;
+//        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 1;
         c.gridy = 0;
-        c.weightx = .33;
+        c.weightx = .5;
         shipPanel.add(shipList);
         frame.add(shipPanel, c);
     }

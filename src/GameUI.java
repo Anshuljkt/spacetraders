@@ -211,6 +211,9 @@ public class GameUI {
                             selectedEncounter = rand.nextInt(2);
                         }
                         NPCUI npc = new NPCUI(game, encounterTypes[selectedEncounter]);
+                        npc = new NPCUI(game, "Bandit"); //Remove this when the other things work.
+                        frame.setVisible(false);
+                        frame.dispose();
                         NPCUI.startNPCEncounter();
                     }
                     currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
