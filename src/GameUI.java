@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
+import java.util.Random;
 
 public class GameUI {
     private static Game game;
@@ -20,10 +20,10 @@ public class GameUI {
 
         GridBagConstraints c = new GridBagConstraints();
 
-        JList playerInfo = new JList(game.getPlayer().toArray());
+        JList playerInfo = new JList(Player.toArray());
         playerPanel(playerInfo);
 
-        JList currReg = new JList(game.getPlayer().getRegion().toArray());
+        JList currReg = new JList(Player.getRegion().toArray());
         curRegPanel(currReg);
 
         JList shipList = new JList(Player.getShip().toArray());
@@ -81,7 +81,7 @@ public class GameUI {
         c.gridy = 2;
         tradeButton.addActionListener(e -> {
             //trade actions
-            new MarketUI(game, game.getPlayer().getRegion().getMarket());
+            new MarketUI(game, Player.getRegion().getMarket());
             MarketUI.openMarket();
             frame.setVisible(false);
         });
@@ -184,24 +184,46 @@ public class GameUI {
         c.gridy = 4;
         //Travel Actions
         travelHere.addActionListener(e -> {
-            if (game.getPlayer().getFuel() >= game
+            if (Player.getFuel() >= game
                     .getUniverse().getRegions()[regDisplay].findDistance()
                     / game.getPlayer().getPilot()) {
                 ConfirmationBoxUI travelConf = new ConfirmationBoxUI();
                 travelConf.confirmBox("Are you sure you'd like to travel here?", "Yes", ActionListener -> {
-                game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
-                        .findDistance() / game.getPlayer().getPilot());
-                game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
-                currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
-                distText.setText("<html>" + distTextDesc + game
-                        .getUniverse().getRegions()[regDisplay]
-                        .findDistance() + "</html>");
-                fuelCostText.setText("<html>" + fuelCostTextDesc + (game
-                        .getUniverse().getRegions()[regDisplay]
-                        .findDistance() / game.getPlayer().getPilot()) + "</html>");
-                playerInfo.setListData(game.getPlayer().toArray());
-                shipList.setListData(Player.getShip().toArray());
-                Player.adjustInvPricing();});
+                    game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
+                            .findDistance() / game.getPlayer().getPilot());
+                    game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
+                    Random rand = new Random();
+                    double encounterChance = rand.nextDouble();
+                    double threshold = 0;
+                    if (game.getDifficulty().equals("Hard")) {
+                        threshold = 0.5;
+                    } else if (game.getDifficulty().equals("Medium")) {
+                        threshold = 0.3;
+                    } else if (game.getDifficulty().equals("Easy")) {
+                        threshold = 0.2;
+                    }
+                    if (encounterChance < threshold) {
+                        String[] encounterTypes = {"Bandit", "Trader", "Police"};
+                        int selectedEncounter;
+                        if (Player.getInvSize() > 0) {
+                            selectedEncounter = rand.nextInt(3);
+                        } else {
+                            selectedEncounter = rand.nextInt(2);
+                        }
+                        NPCUI npc = new NPCUI(game, encounterTypes[selectedEncounter]);
+                        NPCUI.startNPCEncounter();
+                    }
+                    currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
+                    distText.setText("<html>" + distTextDesc + game
+                            .getUniverse().getRegions()[regDisplay]
+                            .findDistance() + "</html>");
+                    fuelCostText.setText("<html>" + fuelCostTextDesc + (game
+                            .getUniverse().getRegions()[regDisplay]
+                            .findDistance() / game.getPlayer().getPilot()) + "</html>");
+                    playerInfo.setListData(Player.toArray());
+                    shipList.setListData(Player.getShip().toArray());
+                    Player.adjustInvPricing();
+                });
             } else {
                 ConfirmationBoxUI notEnoughFuel = new ConfirmationBoxUI();
                 notEnoughFuel.confirmBox("You don't have the fuel to travel here.", "Ok");

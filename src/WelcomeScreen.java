@@ -73,11 +73,11 @@ class WelcomeScreen {
         c.gridwidth = GridBagConstraints.REMAINDER;
         c.gridx = 0;
         c.gridy = 0;
-        c.weightx = 0.8;
+        c.weightx = 1;
         c.weighty = 0.2;
         c.ipadx = 10;
         c.ipady = 10;
-        c.anchor = GridBagConstraints.PAGE_START;
+//        c.anchor = GridBagConstraints.PAGE_START;
         frame.add(info, c);
 
         JLabel skillPointsText = new JLabel();
@@ -273,7 +273,7 @@ class WelcomeScreen {
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
-        JList playerInfo = new JList(createdPlayer.toArray());
+        JList playerInfo = new JList(Player.toArray());
         c = new GridBagConstraints();
         c.fill = GridBagConstraints.CENTER;
         c.gridwidth = GridBagConstraints.REMAINDER;
@@ -295,7 +295,7 @@ class WelcomeScreen {
         c.anchor = GridBagConstraints.PAGE_END;
         JFrame finalFrame = frame;
         beginButton.addActionListener(e -> {
-            gameUI.playGame();
+            GameUI.playGame();
             finalFrame.dispose();
         });
         frame.add(beginButton, c);
