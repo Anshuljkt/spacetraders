@@ -214,7 +214,7 @@ public class GameUI {
                         npc = new NPCUI(game, "Bandit"); //Remove this when the other things work.
                         frame.setVisible(false);
                         frame.dispose();
-                        NPCUI.startNPCEncounter();
+                        npc.startNPCEncounter();
                     }
                     currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
                     distText.setText("<html>" + distTextDesc + game
