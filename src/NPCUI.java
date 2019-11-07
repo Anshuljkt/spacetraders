@@ -13,6 +13,7 @@ public class NPCUI {
     private static int itemInd;
     private static Region curr;
     private static Region next;
+    private static JLabel demandsText;
 
 
     public NPCUI(Game game, String npcType) {
@@ -74,7 +75,7 @@ public class NPCUI {
         c.anchor = GridBagConstraints.CENTER;
         c.weightx = 1;
         frame.add(encounterText, c);
-        JLabel demandsText = new JLabel(String.format("The Bandit says: Give me %d credits!", demandAmount));
+        demandsText = new JLabel(String.format("The Bandit says: Give me %d credits!", demandAmount));
         c = new GridBagConstraints();
         c.gridy = 2;
         c.gridx = 1;
@@ -241,7 +242,7 @@ public class NPCUI {
         c.anchor = GridBagConstraints.CENTER;
         c.weightx = 1;
         frame.add(encounterText, c);
-        JLabel demandsText = new JLabel(String.format("The Officer says: You are carrying a stolen item. Hand over the %s.", item.getName()));
+        demandsText = new JLabel(String.format("The Officer says: You are carrying a stolen item. Hand over the %s.", item.getName()));
         c = new GridBagConstraints();
         c.gridy = 2;
         c.gridx = 1;
@@ -373,9 +374,9 @@ public class NPCUI {
 
         buyButton();
 
-        //robButton();
+        robButton();
 
-        //negotiateButton();
+        negotiateButton();
 
         frame.setVisible(true);
     }
@@ -391,7 +392,7 @@ public class NPCUI {
         c.anchor = GridBagConstraints.CENTER;
         c.weightx = 1;
         frame.add(encounterText, c);
-        JLabel demandsText = new JLabel(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
+        demandsText = new JLabel(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
         c = new GridBagConstraints();
         c.gridy = 2;
         c.gridx = 1;
@@ -409,13 +410,13 @@ public class NPCUI {
     }
 
     private static void ignoreButton() {
-        Random forGen = new Random();
-        JButton forfeit = new JButton("Ignore");
+        Random igGen = new Random();
+        JButton ignore = new JButton("Ignore");
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 0;
         c.gridy = 5;
         c.gridheight = 1;
-        forfeit.addActionListener(e -> {
+        ignore.addActionListener(e -> {
             frame.setVisible(false);
             frame.dispose();
             Player.setRegion(next);
@@ -424,21 +425,21 @@ public class NPCUI {
                 GameUI.playGame();
             });
         });
-        frame.add(forfeit, c);
+        frame.add(ignore, c);
     }
 
     private static void buyButton() {
-        Random forGen = new Random();
-        JButton forfeit = new JButton("Buy");
+        Random buyGen = new Random();
+        JButton buy = new JButton("Buy");
         GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 5;
         c.gridheight = 1;
-        forfeit.addActionListener(e -> {
+        buy.addActionListener(e -> {
             if (Player.getCredits() >= (int)item.getBuyPrice()) {
                 Player.subCredits((int)item.getBuyPrice());
                 Player.addInv(item);
-                Player.addCargoLeft(item.getCargoSpace());
+                Player.subCargoLeft(item.getCargoSpace());
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
@@ -451,7 +452,68 @@ public class NPCUI {
             }
 
         });
-        frame.add(forfeit, c);
+        frame.add(buy, c);
+    }
+
+    private static void robButton() {
+        Random robGen = new Random();
+        JButton rob = new JButton("Rob");
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 2;
+        c.gridy = 5;
+        c.gridheight = 1;
+        rob.addActionListener(e -> {
+            if (robGen.nextDouble() < .1 + .1 * Player.getFighter()) {
+                Player.addInv(item);
+                Player.subCargoLeft(item.getCargoSpace());
+                frame.setVisible(false);
+                frame.dispose();
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox(String.format("You stole the %s!", item.getName()), "Ok", ActionListener -> {
+                    new GameUI(NPCUI.game);
+                    GameUI.playGame();
+                });
+            } else {
+                Player.getShip().setShipHealth(Player.getShip().getShipHealth()
+                        - robGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                frame.setVisible(false);
+                frame.dispose();
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox(String.format("You couldn't steal the %s, you took damage in the scuffle.", item.getName()), "Ok", ActionListener -> {
+                    new GameUI(NPCUI.game);
+                    GameUI.playGame();
+                });
+            }
+        });
+        frame.add(rob, c);
+    }
+
+    private static void negotiateButton() {
+        Random negGen = new Random();
+        var ref = new Object() {
+            int negCount = 0;
+        };
+        JButton neg = new JButton("Negotiate");
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 6;
+        c.gridheight = 1;
+        neg.addActionListener(e -> {
+            if (ref.negCount > 0) {
+                ConfirmationBoxUI.confirmBox("You can't negotiate more than once.", "Ok");
+            } else if (negGen.nextDouble() < .1 + .1 * Player.getMerchant()) {
+                ref.negCount++;
+                item.setBuyPrice((item.getBuyPrice() / 10) + 1);
+                ConfirmationBoxUI.confirmBox("You persuade the trader to reduce his price.", "Ok");
+                demandsText.setText(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
+            } else {
+                ref.negCount++;
+                item.setBuyPrice(item.getBuyPrice() * 2);
+                ConfirmationBoxUI.confirmBox("The trader is insulted by your attempt to lower the price.", "Ok");
+                demandsText.setText(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
+            }
+        });
+        frame.add(neg, c);
     }
 
     private static void playerPanel(JList playerInfo) {
