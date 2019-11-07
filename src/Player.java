@@ -16,11 +16,11 @@ public class Player {
     private static int cargoLeft;
 
 
-    public String getName() {
+    public static String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public static void setName(String name) {
         Player.name = name;
     }
 
@@ -28,15 +28,15 @@ public class Player {
         return credits;
     }
 
-    public void setCredits(int credits) {
+    public static void setCredits(int credits) {
         Player.credits = credits;
     }
 
-    public int getSkillPoints() {
+    public static int getSkillPoints() {
         return skillPoints;
     }
 
-    public void setSkillPoints(int skillPoints) {
+    public static void setSkillPoints(int skillPoints) {
         Player.skillPoints = skillPoints;
     }
 
@@ -44,35 +44,35 @@ public class Player {
         return region;
     }
 
-    public void setRegion(Region region) {
+    public static void setRegion(Region region) {
         Player.region = region;
     }
 
     public static int getFuel() {
         return fuel; }
 
-    public void setFuel(int fuel) {
+    public static void setFuel(int fuel) {
         Player.fuel = fuel; }
 
     public static Ship getShip() {
         return ship; }
 
-    public void setShip(Ship ship) {
+    public static void setShip(Ship ship) {
         Player.ship = ship; }
 
-    public int getPilot() {
+    public static int getPilot() {
         return pilot;
     }
 
-    public void setPilot(int pilot) {
+    public static void setPilot(int pilot) {
         Player.pilot = pilot;
     }
 
-    public int getFighter() {
+    public static int getFighter() {
         return fighter;
     }
 
-    public void setFighter(int fighter) {
+    public static void setFighter(int fighter) {
         Player.fighter = fighter;
     }
 
@@ -80,15 +80,15 @@ public class Player {
         return merchant;
     }
 
-    public void setMerchant(int merchant) {
+    public static void setMerchant(int merchant) {
         Player.merchant = merchant;
     }
 
-    public int getEngineer() {
+    public static int getEngineer() {
         return engineer;
     }
 
-    public void setEngineer(int engineer) {
+    public static void setEngineer(int engineer) {
         Player.engineer = engineer;
     }
 
@@ -133,7 +133,7 @@ public class Player {
         return response;
     }
 
-    public void addFuel(int amount) {
+    public static void addFuel(int amount) {
         int temp = fuel + amount;
         int max = ship.getFuelCapacity();
         if (temp > max) {
@@ -143,11 +143,11 @@ public class Player {
         }
     }
 
-    public void subFuel(int amount) {
+    public static void subFuel(int amount) {
         fuel -= amount;
     }
 
-    public String[] invToArray(int invNum) {
+    public static String[] invToArray(int invNum) {
         String[] response = new String[7];
         if ((inventory.size() - 1 < invNum) || invNum < 0) {
             response[0] = "Empty";
@@ -167,36 +167,41 @@ public class Player {
         return cargoLeft;
     }
 
-    public void resetCargoLeft() {
+    public static void resetCargoLeft() {
         cargoLeft = ship.getCargoSpace();
     }
 
-    public void subCargoLeft(int val) {
+    public static void subCargoLeft(int val) {
         cargoLeft -= val;
     }
 
-    public void addCargoLeft(int val) {
+    public static void addCargoLeft(int val) {
         cargoLeft += val;
     }
 
-    public void addInv(Item item) {
+    public static void addInv(Item item) {
         inventory.add(item);
     }
 
-    public Item subInv(int num) {
+    public static Item subInv(int num) {
         return inventory.remove(num);
     }
 
-    public void subCredits(int amount) {
+    public static void subCredits(int amount) {
         credits -= amount;
     }
 
-    public void addCredits(int amount) {
+    public static void addCredits(int amount) {
         credits += amount;
     }
 
-    public Item getItem(int num) {
+    public static Item getItem(int num) {
         return inventory.get(num);
+    }
+
+    public static void resetInventory() {
+        Player.inventory = new ArrayList<Item>();
+        Player.cargoLeft = ship.getCargoSpace();
     }
 
     public static void adjustInvPricing() {
