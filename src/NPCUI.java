@@ -11,14 +11,18 @@ public class NPCUI {
     private static int demandAmount;
     private static Item item;
     private static int itemInd;
-    private static boolean doTravel = true;
+    private static Region curr;
+    private static Region next;
+
 
     public NPCUI(Game game, String npcType) {
         NPCUI.game = game;
         NPCUI.npcType = npcType;
     }
 
-    static boolean startNPCEncounter() {
+    static void startNPCEncounter(Region curr, Region next) {
+        NPCUI.curr = curr;
+        NPCUI.next = next;
         if(npcType.equals("Bandit")) {
             showBandit();
         } else if (npcType.equals("Police")) {
@@ -26,7 +30,6 @@ public class NPCUI {
         } else if (npcType.equals(("Trader"))) {
             showTrader();
         }
-        return doTravel;
     }
 
     //TODO
@@ -104,7 +107,7 @@ public class NPCUI {
                 ConfirmationBoxUI.actionBox("The bandit attacked you and fled!", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = true;
+                    Player.setRegion(next);
                 });
             } else if (demandAmount > Player.getCredits()) {
                 Player.resetInventory();
@@ -113,7 +116,7 @@ public class NPCUI {
                 ConfirmationBoxUI.actionBox("The bandit stole your whole inventory!", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = true;
+                    Player.setRegion(next);
                 });
             } else {
                 Player.subCredits(demandAmount);
@@ -122,7 +125,7 @@ public class NPCUI {
                 ConfirmationBoxUI.actionBox("You paid the bandit and he flew away.", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = true;
+                    Player.setRegion(next);
                 });
             }
         });
@@ -143,7 +146,7 @@ public class NPCUI {
                 ConfirmationBoxUI.actionBox("You escaped the bandit!", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = false;
+                    Player.setRegion(curr);
                 });
             } else {
                 Player.setCredits(0);
@@ -154,7 +157,7 @@ public class NPCUI {
                 ConfirmationBoxUI.actionBox("You couldn't escape. You suffered damage and lost all your credits.", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = false;
+                    Player.setRegion(curr);
                 });
             }
         });
@@ -176,7 +179,7 @@ public class NPCUI {
                 ConfirmationBoxUI.actionBox("You defeated the bandit and looted some credits!", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = true;
+                   Player.setRegion(next);
                 });
             } else {
                 Player.setCredits(0);
@@ -187,7 +190,7 @@ public class NPCUI {
                 ConfirmationBoxUI.actionBox("You couldn't defeat the bandit. You lost your credits and took damage.", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = true;
+                    Player.setRegion(next);
                 });
             }
         });
@@ -221,7 +224,7 @@ public class NPCUI {
 
         fleePButton();
 
-        //fightPButton();
+        fightPButton();
 
         frame.setVisible(true);
 
@@ -267,10 +270,10 @@ public class NPCUI {
             Player.subInv(itemInd);
             frame.setVisible(false);
             frame.dispose();
+            Player.setRegion(next);
             ConfirmationBoxUI.actionBox("You gave up the item and moved on.", "Ok", ActionListener -> {
                 new GameUI(NPCUI.game);
                 GameUI.playGame();
-                doTravel = true;
             });
         });
         frame.add(forfeit, c);
@@ -287,10 +290,10 @@ public class NPCUI {
             if (fleeGen.nextDouble() < .1 + .1 * Player.getPilot()) {
                 frame.setVisible(false);
                 frame.dispose();
+                Player.setRegion(curr);
                 ConfirmationBoxUI.actionBox("You escaped the officer!", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = false;
                 });
             } else {
                 Player.addCargoLeft(item.getCargoSpace());
@@ -300,14 +303,48 @@ public class NPCUI {
                         - fleeGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
                 frame.setVisible(false);
                 frame.dispose();
+                Player.setRegion(curr);
                 ConfirmationBoxUI.actionBox("You couldn't escape. The officer has punished you greatly for resisting.", "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
-                    doTravel = false;
                 });
             }
         });
         frame.add(flee, c);
+    }
+
+    private static void fightPButton() {
+        Random fightGen = new Random();
+        JButton fight = new JButton("Fight");
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 2;
+        c.gridy = 5;
+        c.gridheight = 1;
+        fight.addActionListener(e -> {
+            if (fightGen.nextDouble() < .1 + .1 * Player.getFighter()) {
+                frame.setVisible(false);
+                frame.dispose();
+                ConfirmationBoxUI.actionBox("You defeated the officer!", "Ok", ActionListener -> {
+                    new GameUI(NPCUI.game);
+                    GameUI.playGame();
+                    Player.setRegion(next);
+                });
+            } else {
+                Player.addCargoLeft(item.getCargoSpace());
+                Player.subInv(itemInd);
+                Player.setCredits(0);
+                Player.getShip().setShipHealth(Player.getShip().getShipHealth()
+                        - fightGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                frame.setVisible(false);
+                frame.dispose();
+                ConfirmationBoxUI.actionBox("You couldn't defeat the officer. You lost your credits and item and took damage.", "Ok", ActionListener -> {
+                    new GameUI(NPCUI.game);
+                    GameUI.playGame();
+                    Player.setRegion(next);
+                });
+            }
+        });
+        frame.add(fight, c);
     }
 
     //TODO

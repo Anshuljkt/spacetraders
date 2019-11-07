@@ -209,26 +209,26 @@ public class GameUI {
                             selectedEncounter = rand.nextInt(2);
                         }
                         NPCUI npc = new NPCUI(game, encounterTypes[selectedEncounter]);
-                        npc = new NPCUI(game, "Police"); //Remove this when the other things work.
+                        npc = new NPCUI(game, "Bandit"); //Remove this when the other things work.
                         frame.setVisible(false);
                         frame.dispose();
-                        doTravel = npc.startNPCEncounter();
+                        npc.startNPCEncounter(Player.getRegion(), game.getUniverse().getRegions()[regDisplay]);
+                    } else {
+                        Player.setRegion(game.getUniverse().getRegions()[regDisplay]);
                     }
                     game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
                             .findDistance() / game.getPlayer().getPilot() / 5);
-                    if (doTravel) {
-                        game.getPlayer().setRegion(game.getUniverse().getRegions()[regDisplay]);
-                        currReg.setListData(game.getUniverse().getRegions()[regDisplay].toArray());
-                        distText.setText("<html>" + distTextDesc + game
-                                .getUniverse().getRegions()[regDisplay]
-                                .findDistance() + "</html>");
-                        fuelCostText.setText("<html>" + fuelCostTextDesc + (game
-                                .getUniverse().getRegions()[regDisplay]
-                                .findDistance() / game.getPlayer().getPilot()) + "</html>");
-                        playerInfo.setListData(Player.toArray());
-                        shipList.setListData(Player.getShip().toArray());
-                        Player.adjustInvPricing();
-                    }
+                    currReg.setListData(Player.getRegion().toArray());
+                    distText.setText("<html>" + distTextDesc + game
+                            .getUniverse().getRegions()[regDisplay]
+                            .findDistance() + "</html>");
+                    fuelCostText.setText("<html>" + fuelCostTextDesc + (game
+                            .getUniverse().getRegions()[regDisplay]
+                            .findDistance() / game.getPlayer().getPilot()) + "</html>");
+                    playerInfo.setListData(Player.toArray());
+                    shipList.setListData(Player.getShip().toArray());
+                    Player.adjustInvPricing();
+
 
                 });
             } else {
