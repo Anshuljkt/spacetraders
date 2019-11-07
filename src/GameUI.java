@@ -189,7 +189,8 @@ public class GameUI {
                     / game.getPlayer().getPilot() / 5) {
                 ConfirmationBoxUI travelConf = new ConfirmationBoxUI();
                 travelConf.actionConfirmBox("Are you sure you'd like to travel here?", "Yes", ActionListener -> {
-                    boolean doTravel = true;
+                    game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
+                            .findDistance() / game.getPlayer().getPilot() / 5);
                     Random rand = new Random();
                     double encounterChance = rand.nextDouble();
                     double threshold = 0;
@@ -209,15 +210,13 @@ public class GameUI {
                             selectedEncounter = rand.nextInt(2);
                         }
                         NPCUI npc = new NPCUI(game, encounterTypes[selectedEncounter]);
-                        npc = new NPCUI(game, "Bandit"); //Remove this when the other things work.
+                        npc = new NPCUI(game, "Trader"); //Remove this when the other things work.
                         frame.setVisible(false);
                         frame.dispose();
                         npc.startNPCEncounter(Player.getRegion(), game.getUniverse().getRegions()[regDisplay]);
                     } else {
                         Player.setRegion(game.getUniverse().getRegions()[regDisplay]);
                     }
-                    game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
-                            .findDistance() / game.getPlayer().getPilot() / 5);
                     currReg.setListData(Player.getRegion().toArray());
                     distText.setText("<html>" + distTextDesc + game
                             .getUniverse().getRegions()[regDisplay]

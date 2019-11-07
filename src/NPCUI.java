@@ -351,6 +351,107 @@ public class NPCUI {
     static void showTrader() {
         frame = new JFrame("Trader Encounter!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        Random gen = new Random();
+        item = new ShipUpgrade(TechLevel.getRandomTech(), gen.nextDouble() / 4 / Player.getMerchant());
+        frame.setSize(800, 600);
+        frame.setLayout(new GridBagLayout());
+        frame.setLocationRelativeTo(null);
+        GridBagConstraints c = new GridBagConstraints();
+
+        JList playerInfo = new JList(Player.toArray());
+        playerPanel(playerInfo);
+
+        JList shipList = new JList(Player.getShip().toArray());
+        shipPanel(shipList);
+
+        JPanel encounterPanel = new JPanel();
+        encounterPanel.setLayout(new GridBagLayout());
+
+        traderPanel();
+
+        ignoreButton();
+
+        buyButton();
+
+        //robButton();
+
+        //negotiateButton();
+
+        frame.setVisible(true);
+    }
+
+    private static void traderPanel() {
+        JLabel encounterText = new JLabel("As you reach the jump point"
+                + " for the next region, you are approached by a Trader.");
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridy = 1;
+        c.gridx = 0;
+        c.gridwidth = 3;
+        c.fill = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.CENTER;
+        c.weightx = 1;
+        frame.add(encounterText, c);
+        JLabel demandsText = new JLabel(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
+        c = new GridBagConstraints();
+        c.gridy = 2;
+        c.gridx = 1;
+        c.weightx = 1;
+        c.gridwidth = 1;
+        c.fill = GridBagConstraints.REMAINDER;
+        c.anchor = GridBagConstraints.CENTER;
+        frame.add(demandsText, c);
+        JLabel question = new JLabel("What would you like to do?");
+        c = new GridBagConstraints();
+        c.gridy = 3;
+        c.gridx = 1;
+        c.gridheight = 2;
+        frame.add(question, c);
+    }
+
+    private static void ignoreButton() {
+        Random forGen = new Random();
+        JButton forfeit = new JButton("Ignore");
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 5;
+        c.gridheight = 1;
+        forfeit.addActionListener(e -> {
+            frame.setVisible(false);
+            frame.dispose();
+            Player.setRegion(next);
+            ConfirmationBoxUI.actionBox("You move on.", "Ok", ActionListener -> {
+                new GameUI(NPCUI.game);
+                GameUI.playGame();
+            });
+        });
+        frame.add(forfeit, c);
+    }
+
+    private static void buyButton() {
+        Random forGen = new Random();
+        JButton forfeit = new JButton("Buy");
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 5;
+        c.gridheight = 1;
+        forfeit.addActionListener(e -> {
+            if (Player.getCredits() >= (int)item.getBuyPrice()) {
+                Player.subCredits((int)item.getBuyPrice());
+                Player.addInv(item);
+                Player.addCargoLeft(item.getCargoSpace());
+                frame.setVisible(false);
+                frame.dispose();
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox(String.format("You bought the %s.", item.getName()), "Ok", ActionListener -> {
+                    new GameUI(NPCUI.game);
+                    GameUI.playGame();
+                });
+            } else {
+                ConfirmationBoxUI.confirmBox("You can't afford the item.", "Ok");
+            }
+
+        });
+        frame.add(forfeit, c);
     }
 
     private static void playerPanel(JList playerInfo) {
