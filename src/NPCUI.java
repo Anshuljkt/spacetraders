@@ -304,7 +304,7 @@ public class NPCUI {
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(curr);
-                ConfirmationBoxUI.actionBox("You couldn't escape. The officer has punished you greatly for resisting.", "Ok", ActionListener -> {
+                ConfirmationBoxUI.actionBox(String.format("You couldn't escape. The officer has confiscated the %s and punished you greatly for resisting.", item.getName()), "Ok", ActionListener -> {
                     new GameUI(NPCUI.game);
                     GameUI.playGame();
                 });
