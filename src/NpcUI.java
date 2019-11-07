@@ -2,7 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Random;
 
-public class NPCUI {
+public class NpcUI {
     private static Game game;
     private static String npcType;
     private static int regDisplayMark;
@@ -16,15 +16,15 @@ public class NPCUI {
     private static JLabel demandsText;
 
 
-    public NPCUI(Game game, String npcType) {
-        NPCUI.game = game;
-        NPCUI.npcType = npcType;
+    public NpcUI(Game game, String npcType) {
+        NpcUI.game = game;
+        NpcUI.npcType = npcType;
     }
 
     static void startNPCEncounter(Region curr, Region next) {
-        NPCUI.curr = curr;
-        NPCUI.next = next;
-        if(npcType.equals("Bandit")) {
+        NpcUI.curr = curr;
+        NpcUI.next = next;
+        if (npcType.equals("Bandit")) {
             showBandit();
         } else if (npcType.equals("Police")) {
             showPolice();
@@ -75,7 +75,8 @@ public class NPCUI {
         c.anchor = GridBagConstraints.CENTER;
         c.weightx = 1;
         frame.add(encounterText, c);
-        demandsText = new JLabel(String.format("The Bandit says: Give me %d credits!", demandAmount));
+        demandsText = new JLabel(String
+                .format("The Bandit says: Give me %d credits!", demandAmount));
         c = new GridBagConstraints();
         c.gridy = 2;
         c.gridx = 1;
@@ -105,29 +106,32 @@ public class NPCUI {
                         - payGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
                 frame.setVisible(false);
                 frame.dispose();
-                ConfirmationBoxUI.actionBox("The bandit attacked you and fled!", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                    Player.setRegion(next);
-                });
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox("The bandit attacked you and fled!"
+                        , "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             } else if (demandAmount > Player.getCredits()) {
                 Player.resetInventory();
                 frame.setVisible(false);
                 frame.dispose();
-                ConfirmationBoxUI.actionBox("The bandit stole your whole inventory!", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                    Player.setRegion(next);
-                });
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox("The bandit stole your whole inventory!"
+                        , "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             } else {
                 Player.subCredits(demandAmount);
                 frame.setVisible(false);
                 frame.dispose();
-                ConfirmationBoxUI.actionBox("You paid the bandit and he flew away.", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                    Player.setRegion(next);
-                });
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox("You paid the bandit and he flew away."
+                        , "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             }
         });
         frame.add(pay, c);
@@ -144,10 +148,10 @@ public class NPCUI {
             if (fleeGen.nextDouble() < .1 + .1 * Player.getPilot()) {
                 frame.setVisible(false);
                 frame.dispose();
+                Player.setRegion(curr);
                 ConfirmationBoxUI.actionBox("You escaped the bandit!", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
+                    new GameUI(NpcUI.game);
                     GameUI.playGame();
-                    Player.setRegion(curr);
                 });
             } else {
                 Player.setCredits(0);
@@ -155,11 +159,13 @@ public class NPCUI {
                         - fleeGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
                 frame.setVisible(false);
                 frame.dispose();
-                ConfirmationBoxUI.actionBox("You couldn't escape. You suffered damage and lost all your credits.", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                    Player.setRegion(curr);
-                });
+                Player.setRegion(curr);
+                ConfirmationBoxUI.actionBox("You couldn't escape."
+                                + " You suffered damage and lost all your credits."
+                        , "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             }
         });
         frame.add(flee, c);
@@ -177,22 +183,24 @@ public class NPCUI {
                 Player.addCredits(fightGen.nextInt(150) + 50);
                 frame.setVisible(false);
                 frame.dispose();
-                ConfirmationBoxUI.actionBox("You defeated the bandit and looted some credits!", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                   Player.setRegion(next);
-                });
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox("You defeated the bandit and looted some credits!"
+                        , "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             } else {
                 Player.setCredits(0);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fightGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
                 frame.setVisible(false);
                 frame.dispose();
-                ConfirmationBoxUI.actionBox("You couldn't defeat the bandit. You lost your credits and took damage.", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                    Player.setRegion(next);
-                });
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox("You couldn't defeat the bandit."
+                        + " You lost your credits and took damage.", "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             }
         });
         frame.add(fight, c);
@@ -242,7 +250,8 @@ public class NPCUI {
         c.anchor = GridBagConstraints.CENTER;
         c.weightx = 1;
         frame.add(encounterText, c);
-        demandsText = new JLabel(String.format("The Officer says: You are carrying a stolen item. Hand over the %s.", item.getName()));
+        demandsText = new JLabel(String.format("The Officer says: You are carrying a stolen item."
+                + " Hand over the %s.", item.getName()));
         c = new GridBagConstraints();
         c.gridy = 2;
         c.gridx = 1;
@@ -272,10 +281,11 @@ public class NPCUI {
             frame.setVisible(false);
             frame.dispose();
             Player.setRegion(next);
-            ConfirmationBoxUI.actionBox("You gave up the item and moved on.", "Ok", ActionListener -> {
-                new GameUI(NPCUI.game);
-                GameUI.playGame();
-            });
+            ConfirmationBoxUI.actionBox("You gave up the item and moved on."
+                    , "Ok", ActionListener -> {
+                    new GameUI(NpcUI.game);
+                    GameUI.playGame();
+                });
         });
         frame.add(forfeit, c);
     }
@@ -293,7 +303,7 @@ public class NPCUI {
                 frame.dispose();
                 Player.setRegion(curr);
                 ConfirmationBoxUI.actionBox("You escaped the officer!", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
+                    new GameUI(NpcUI.game);
                     GameUI.playGame();
                 });
             } else {
@@ -305,10 +315,13 @@ public class NPCUI {
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(curr);
-                ConfirmationBoxUI.actionBox(String.format("You couldn't escape. The officer has confiscated the %s and punished you greatly for resisting.", item.getName()), "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                });
+                ConfirmationBoxUI.actionBox(String.format("You couldn't escape. "
+                                + "The officer has confiscated the %s and "
+                                + "punished you greatly for resisting."
+                        , item.getName()), "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             }
         });
         frame.add(flee, c);
@@ -325,10 +338,10 @@ public class NPCUI {
             if (fightGen.nextDouble() < .1 + .1 * Player.getFighter()) {
                 frame.setVisible(false);
                 frame.dispose();
+                Player.setRegion(next);
                 ConfirmationBoxUI.actionBox("You defeated the officer!", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
+                    new GameUI(NpcUI.game);
                     GameUI.playGame();
-                    Player.setRegion(next);
                 });
             } else {
                 Player.addCargoLeft(item.getCargoSpace());
@@ -338,11 +351,13 @@ public class NPCUI {
                         - fightGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
                 frame.setVisible(false);
                 frame.dispose();
-                ConfirmationBoxUI.actionBox("You couldn't defeat the officer. You lost your credits and item and took damage.", "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                    Player.setRegion(next);
-                });
+                Player.setRegion(next);
+                ConfirmationBoxUI.actionBox("You couldn't defeat the officer."
+                        + " You lost your credits and item and took damage."
+                        , "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             }
         });
         frame.add(fight, c);
@@ -353,7 +368,8 @@ public class NPCUI {
         frame = new JFrame("Trader Encounter!");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Random gen = new Random();
-        item = new ShipUpgrade(TechLevel.getRandomTech(), gen.nextDouble() / 4 / Player.getMerchant());
+        item = new ShipUpgrade(TechLevel.getRandomTech()
+                , gen.nextDouble() / 4 / Player.getMerchant());
         frame.setSize(800, 600);
         frame.setLayout(new GridBagLayout());
         frame.setLocationRelativeTo(null);
@@ -392,7 +408,8 @@ public class NPCUI {
         c.anchor = GridBagConstraints.CENTER;
         c.weightx = 1;
         frame.add(encounterText, c);
-        demandsText = new JLabel(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
+        demandsText = new JLabel(String.format("The Trader says: Would you like "
+                + "to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
         c = new GridBagConstraints();
         c.gridy = 2;
         c.gridx = 1;
@@ -421,7 +438,7 @@ public class NPCUI {
             frame.dispose();
             Player.setRegion(next);
             ConfirmationBoxUI.actionBox("You move on.", "Ok", ActionListener -> {
-                new GameUI(NPCUI.game);
+                new GameUI(NpcUI.game);
                 GameUI.playGame();
             });
         });
@@ -436,17 +453,18 @@ public class NPCUI {
         c.gridy = 5;
         c.gridheight = 1;
         buy.addActionListener(e -> {
-            if (Player.getCredits() >= (int)item.getBuyPrice()) {
-                Player.subCredits((int)item.getBuyPrice());
+            if (Player.getCredits() >= (int) item.getBuyPrice()) {
+                Player.subCredits((int) item.getBuyPrice());
                 Player.addInv(item);
                 Player.subCargoLeft(item.getCargoSpace());
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
-                ConfirmationBoxUI.actionBox(String.format("You bought the %s.", item.getName()), "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                });
+                ConfirmationBoxUI.actionBox(String.format("You bought the %s."
+                        , item.getName()), "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             } else {
                 ConfirmationBoxUI.confirmBox("You can't afford the item.", "Ok");
             }
@@ -469,20 +487,23 @@ public class NPCUI {
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
-                ConfirmationBoxUI.actionBox(String.format("You stole the %s!", item.getName()), "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                });
+                ConfirmationBoxUI.actionBox(String.format("You stole the %s!"
+                        , item.getName()), "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             } else {
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - robGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
-                ConfirmationBoxUI.actionBox(String.format("You couldn't steal the %s, you took damage in the scuffle.", item.getName()), "Ok", ActionListener -> {
-                    new GameUI(NPCUI.game);
-                    GameUI.playGame();
-                });
+                ConfirmationBoxUI.actionBox(String.format("You couldn't steal the %s, "
+                                + "you took damage in the scuffle."
+                        , item.getName()), "Ok", ActionListener -> {
+                        new GameUI(NpcUI.game);
+                        GameUI.playGame();
+                    });
             }
         });
         frame.add(rob, c);
@@ -505,12 +526,16 @@ public class NPCUI {
                 ref.negCount++;
                 item.setBuyPrice((item.getBuyPrice() / 10) + 1);
                 ConfirmationBoxUI.confirmBox("You persuade the trader to reduce his price.", "Ok");
-                demandsText.setText(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
+                demandsText.setText(String.format("The Trader says: Would you like to buy "
+                        + "a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
             } else {
                 ref.negCount++;
                 item.setBuyPrice(item.getBuyPrice() * 2);
-                ConfirmationBoxUI.confirmBox("The trader is insulted by your attempt to lower the price.", "Ok");
-                demandsText.setText(String.format("The Trader says: Would you like to buy a %s for %.0f credits?", item.getName(), item.getBuyPrice()));
+                ConfirmationBoxUI.confirmBox("The trader is insulted by your "
+                        + "attempt to lower the price.", "Ok");
+                demandsText.setText(String.format("The Trader says: Would you "
+                        + "like to buy a %s for %.0f credits?"
+                        , item.getName(), item.getBuyPrice()));
             }
         });
         frame.add(neg, c);

@@ -77,7 +77,6 @@ class WelcomeScreen {
         c.weighty = 0.2;
         c.ipadx = 10;
         c.ipady = 10;
-//        c.anchor = GridBagConstraints.PAGE_START;
         frame.add(info, c);
 
         JLabel skillPointsText = new JLabel();
@@ -305,4 +304,5 @@ class WelcomeScreen {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
     }
+
 }

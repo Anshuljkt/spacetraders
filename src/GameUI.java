@@ -184,52 +184,69 @@ public class GameUI {
         c.gridy = 4;
         //Travel Actions
         travelHere.addActionListener(e -> {
-            if (Player.getFuel() >= game
+            if (Player.getRegion().getName().equals(game.getUniverse()
+                    .getRegions()[regDisplay].getName())) {
+                ConfirmationBoxUI
+                        .confirmBox("You cannot travel to the region you're already in.", "Ok");
+            } else if (Player.getFuel() >= game
                     .getUniverse().getRegions()[regDisplay].findDistance()
                     / game.getPlayer().getPilot() / 5) {
                 ConfirmationBoxUI travelConf = new ConfirmationBoxUI();
-                travelConf.actionConfirmBox("Are you sure you'd like to travel here?", "Yes", ActionListener -> {
-                    game.getPlayer().subFuel(game.getUniverse().getRegions()[regDisplay]
+                travelConf.actionConfirmBox("Are you sure you'd like to travel here?"
+                        , "Yes", ActionListener -> {
+                        game.getPlayer().subFuel(game
+                            .getUniverse().getRegions()[regDisplay]
                             .findDistance() / game.getPlayer().getPilot() / 5);
-                    Random rand = new Random();
-                    double encounterChance = rand.nextDouble();
-                    double threshold = 0;
-                    if (game.getDifficulty().equals("Hard")) {
-                        threshold = 0.5;
-                    } else if (game.getDifficulty().equals("Medium")) {
-                        threshold = 0.3;
-                    } else if (game.getDifficulty().equals("Easy")) {
-                        threshold = 0.2;
-                    }
-                    if (encounterChance < threshold) {
-                        String[] encounterTypes = {"Bandit", "Trader", "Police"};
-                        int selectedEncounter;
-                        if (Player.getInvSize() > 0) {
-                            selectedEncounter = rand.nextInt(3);
-                        } else {
-                            selectedEncounter = rand.nextInt(2);
+                        Random rand = new Random();
+                        double encounterChance = rand.nextDouble();
+                        double threshold = .5;
+                        double tChance = 1;
+                        double pChance = .5;
+                        double bChance = .25;
+                        if (game.getDifficulty().equals("Hard")) {
+                            bChance = .4;
+                            pChance = .8;
+                        } else if (game.getDifficulty().equals("Medium")) {
+                            bChance = .3;
+                            pChance = .6;
+                        } else if (game.getDifficulty().equals("Easy")) {
+                            bChance = .2;
+                            pChance = .4;
                         }
-                        NPCUI npc = new NPCUI(game, encounterTypes[selectedEncounter]);
-                        npc = new NPCUI(game, "Trader"); //Remove this when the other things work.
-                        frame.setVisible(false);
-                        frame.dispose();
-                        npc.startNPCEncounter(Player.getRegion(), game.getUniverse().getRegions()[regDisplay]);
-                    } else {
-                        Player.setRegion(game.getUniverse().getRegions()[regDisplay]);
-                    }
-                    currReg.setListData(Player.getRegion().toArray());
-                    distText.setText("<html>" + distTextDesc + game
+                        if (encounterChance < .5) {
+                            encounterChance = rand.nextDouble();
+                            String[] encounterTypes = {"Bandit", "Trader", "Police"};
+                            int selectedEncounter;
+                            if (encounterChance <= bChance) {
+                                selectedEncounter = 0;
+                            } else if (encounterChance <= pChance) {
+                                if (Player.getInvSize() > 0) {
+                                    selectedEncounter = 2;
+                                } else {
+                                    selectedEncounter = 0;
+                                }
+                            } else {
+                                selectedEncounter = 1;
+                            }
+                            NpcUI npc = new NpcUI(game, encounterTypes[selectedEncounter]);
+                            frame.setVisible(false);
+                            frame.dispose();
+                            npc.startNPCEncounter(Player.getRegion()
+                                , game.getUniverse().getRegions()[regDisplay]);
+                        } else {
+                            Player.setRegion(game.getUniverse().getRegions()[regDisplay]);
+                        }
+                        currReg.setListData(Player.getRegion().toArray());
+                        distText.setText("<html>" + distTextDesc + game
                             .getUniverse().getRegions()[regDisplay]
                             .findDistance() + "</html>");
-                    fuelCostText.setText("<html>" + fuelCostTextDesc + (game
+                        fuelCostText.setText("<html>" + fuelCostTextDesc + (game
                             .getUniverse().getRegions()[regDisplay]
                             .findDistance() / game.getPlayer().getPilot()) + "</html>");
-                    playerInfo.setListData(Player.toArray());
-                    shipList.setListData(Player.getShip().toArray());
-                    Player.adjustInvPricing();
-
-
-                });
+                        playerInfo.setListData(Player.toArray());
+                        shipList.setListData(Player.getShip().toArray());
+                        Player.adjustInvPricing();
+                    });
             } else {
                 ConfirmationBoxUI notEnoughFuel = new ConfirmationBoxUI();
                 notEnoughFuel.confirmBox("You don't have the fuel to travel here.", "Ok");
