@@ -150,7 +150,6 @@ public class MarketUI {
                 if (market.getGoodCargo(regDisplayMark) <= game.getPlayer().getCargoLeft()) {
                     game.getPlayer().subCargoLeft(market.getGoodCargo(regDisplayMark));
                     game.getPlayer().subCredits((int) market.getGoodBuyPrice(regDisplayMark));
-                    System.out.println(Player.getCredits());
                     game.getPlayer().addInv(market.removeGood(regDisplayMark));
                     if (regDisplayMark >= market.getGoodsLength() && market.getGoodsLength() != 0) {
                         regDisplayMark = market.getGoodsLength() - 1;
