@@ -109,6 +109,7 @@ public class Player {
         ship = Ship.CIVIC;
         fuel = ship.getFuelCapacity();
         cargoLeft = ship.getCargoSpace();
+        ship.setShipHealth(ship.getShipHealthMax());
 
         inventory = new ArrayList<Item>();
 

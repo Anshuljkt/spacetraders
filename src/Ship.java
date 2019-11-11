@@ -13,17 +13,17 @@ public enum Ship {
 
     private int cargoSpace;
     private int fuelCapacity;
-    private int shipHealth;
     private int shipHealthMax;
     private int weaponDamage;
+    private int shipHealth;
 
 
 
-    Ship(int cargoSpace, int fuelCapacity, int shipHealth, int weaponDamage) {
+    Ship(int cargoSpace, int fuelCapacity, int shipHealthMax, int weaponDamage) {
         this.cargoSpace = cargoSpace;
         this.fuelCapacity = fuelCapacity;
-        this.shipHealthMax = shipHealth;
-        this.shipHealth = shipHealth;
+        this.shipHealthMax = shipHealthMax;
+        this.shipHealth = shipHealthMax;
         this.weaponDamage = weaponDamage;
     }
 

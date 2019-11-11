@@ -3,10 +3,10 @@ import java.awt.*;
 
 class WelcomeScreen {
 
-    private static JFrame frame = new JFrame("Space Trader by Runtime Terror");
-    private static int skillPoints = 16;
-    private static String difficulty = "Easy";
-    private static Player createdPlayer = null;
+    private static JFrame frame;
+    private static int skillPoints;
+    private static String difficulty;
+    private static Player createdPlayer;
     private static Game game;
     private static GameUI gameUI;
 
@@ -15,6 +15,10 @@ class WelcomeScreen {
      * @param args special inputs
      */
     public static void main(String[] args) {
+        frame = new JFrame("Space Trader by Runtime Terror");
+        skillPoints = 16;
+        difficulty = "Easy";
+        createdPlayer = null;
         javax.swing.SwingUtilities.invokeLater(() -> showStartPage(frame));
     }
 
@@ -250,11 +254,11 @@ class WelcomeScreen {
 
             createdPlayer = new Player(name, pilot, fighter, merchant, engineer, skillPoints);
             if (difficulty.equals("Easy")) {
-                createdPlayer.setCredits(1500);
+                Player.setCredits(1500);
             } else if (difficulty.equals("Medium")) {
-                createdPlayer.setCredits(1000);
+                Player.setCredits(1000);
             } else {
-                createdPlayer.setCredits(500);
+                Player.setCredits(500);
             }
 
             newGame(finalFrame);
@@ -294,8 +298,8 @@ class WelcomeScreen {
         c.anchor = GridBagConstraints.PAGE_END;
         JFrame finalFrame = frame;
         beginButton.addActionListener(e -> {
-            GameUI.playGame();
             finalFrame.dispose();
+            GameUI.playGame();
         });
         frame.add(beginButton, c);
 
