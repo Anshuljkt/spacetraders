@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("CanBeFinal")
 public class Player {
@@ -12,7 +13,7 @@ public class Player {
     private static Region region;
     private static int fuel;
     private static Ship ship;
-    private static ArrayList<Item> inventory;
+    private static List<Item> inventory;
     private static int cargoLeft;
 
 

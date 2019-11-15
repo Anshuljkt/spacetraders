@@ -17,8 +17,6 @@ public enum Ship {
     private int weaponDamage;
     private int shipHealth;
 
-
-
     Ship(int cargoSpace, int fuelCapacity, int shipHealthMax, int weaponDamage) {
         this.cargoSpace = cargoSpace;
         this.fuelCapacity = fuelCapacity;

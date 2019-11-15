@@ -248,10 +248,8 @@ class WelcomeScreen {
                 engineer = Integer.parseInt(engineerBox.getText());
                 name = nameBox.getText();
             } catch (Exception f) {
-
+                f.printStackTrace();
             }
-
-
             createdPlayer = new Player(name, pilot, fighter, merchant, engineer, skillPoints);
             if (difficulty.equals("Easy")) {
                 Player.setCredits(1500);
@@ -260,7 +258,6 @@ class WelcomeScreen {
             } else {
                 Player.setCredits(500);
             }
-
             newGame(finalFrame);
         });
         frame.add(startButton, c);

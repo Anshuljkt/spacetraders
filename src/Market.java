@@ -2,7 +2,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Market {
-
     private Ship ship;
     private int fuelForSale;
     private ArrayList<Item> goods;
@@ -19,7 +18,6 @@ public class Market {
         for (int i = 0; i < numUpgrades; i++) {
             goods.add(new ShipUpgrade(techLevel, priceAdjust));
         }
-
         ship = Ship.getRandomShip();
         goods.add(new Item("Ship", 1000 * (techLevel.getPriceAdjust() + priceAdjust)
                 , 1000 * (techLevel.getPriceAdjust() - priceAdjust)
@@ -28,7 +26,6 @@ public class Market {
         fuelForSale = random.nextInt(120);
         goods.add(new Item("Fuel", fuelForSale * 5
                 , fuelForSale * 5, 5, 0, TechLevel.PREAGRICULTURAL));
-
     }
 
     public String[] toArray(int goodNum) {
