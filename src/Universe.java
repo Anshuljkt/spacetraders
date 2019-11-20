@@ -15,6 +15,7 @@ public class Universe {
         int newY;
         boolean validY;
         regions = new Region[regionNames.length];
+        int winningRegion = random.nextInt(regionNames.length - 1);
         for (int i = 0; i < regionNames.length; i++) {
             newX = 0;
             newY = 0;
@@ -42,9 +43,14 @@ public class Universe {
                 }
             }
             yCoords[i] = newY;
+            if (i == winningRegion) {
+                regions[i] = new Region(xCoords[i], yCoords[i], TechLevel.getRandomTech()
+                        , regionNames[i], merchantSkill, true);
+            } else {
+                regions[i] = new Region(xCoords[i], yCoords[i], TechLevel.getRandomTech()
+                        , regionNames[i], merchantSkill, false);
+            }
 
-            regions[i] = new Region(xCoords[i], yCoords[i], TechLevel.getRandomTech()
-                    , regionNames[i], merchantSkill);
         }
     }
 

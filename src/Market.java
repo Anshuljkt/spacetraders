@@ -3,10 +3,9 @@ import java.util.Random;
 
 public class Market {
     private Ship ship;
-    private int fuelForSale;
     private ArrayList<Item> goods;
 
-    public Market(TechLevel techLevel, double priceAdjust) {
+    public Market(TechLevel techLevel, double priceAdjust, boolean isGameWinning) {
         //one ship
         //some fuel
         //1 or more ship upgrades
@@ -22,10 +21,10 @@ public class Market {
         goods.add(new Item("Ship", 1000 * (techLevel.getPriceAdjust() + priceAdjust)
                 , 1000 * (techLevel.getPriceAdjust() - priceAdjust)
                 , 1000, 0, TechLevel.PREAGRICULTURAL));
-
-        fuelForSale = random.nextInt(120);
-        goods.add(new Item("Fuel", fuelForSale * 5
-                , fuelForSale * 5, 5, 0, TechLevel.PREAGRICULTURAL));
+        if (isGameWinning)
+        {
+            goods.add(new Item( "'s Universe", 9999, 9999, 9999, 0, TechLevel.PREAGRICULTURAL));
+        }
     }
 
     public String[] toArray(int goodNum) {
