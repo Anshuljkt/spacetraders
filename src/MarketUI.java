@@ -49,6 +49,10 @@ public class MarketUI {
         fuelPanel.setLayout(new GridBagLayout());
         fuelPanel(fuelPanel);
 
+        JPanel healthPanel = new JPanel();
+        healthPanel.setLayout(new GridBagLayout());
+        healthPanel(healthPanel);
+
 
         JButton doneButton = new JButton("Done");
         c = new GridBagConstraints();
@@ -277,7 +281,7 @@ public class MarketUI {
         fuelPanel.add(fuel, c);
 
         c = new GridBagConstraints();
-        JLabel cost = new JLabel("Cost: 3");
+        JLabel cost = new JLabel("Cost: 5");
         c.gridx = 0;
         c.gridy = 1;
         fuelPanel.add(cost, c);
@@ -307,7 +311,7 @@ public class MarketUI {
                 boughtF = 0;
             }
             if (boughtF != 0) {
-                if (boughtF * 3 > Player.getCredits()) {
+                if (boughtF * 5 > Player.getCredits()) {
                     ConfirmationBoxUI notEnoughMoney = new ConfirmationBoxUI();
                     notEnoughMoney.confirmBox("Not enough money to purchase", "Ok");
                 } else if (boughtF > Player.getShip().getFuelCapacity() - Player.getFuel()) {
@@ -315,7 +319,7 @@ public class MarketUI {
                     notEnoughSpace.confirmBox("Not enough space to purchase", "Ok");
                 } else {
                     Player.addFuel(boughtF);
-                    Player.subCredits(boughtF * 3);
+                    Player.subCredits(boughtF * 5);
                 }
                 playerInfo.setListData(Player.toArray());
                 shipList.setListData(Player.getShip().toArray());
@@ -331,6 +335,72 @@ public class MarketUI {
         c.gridx = 0;
         c.gridy = 2;
         frame.add(fuelPanel, c);
+    }
+
+    private static void healthPanel(JPanel healthPanel) {
+        int price = 25/(Player.getEngineer() + 1) + 1;
+        GridBagConstraints c = new GridBagConstraints();
+        JLabel fuel = new JLabel("Repair");
+        c.gridx = 0;
+        c.gridy = 0;
+        c.gridwidth = 2;
+        healthPanel.add(fuel, c);
+
+        c = new GridBagConstraints();
+        JLabel cost = new JLabel(String.format("Cost: %d", price));
+        c.gridx = 0;
+        c.gridy = 1;
+        healthPanel.add(cost, c);
+
+        c = new GridBagConstraints();
+        JLabel quan = new JLabel("Amount: ");
+        c.gridx = 0;
+        c.gridy = 2;
+        healthPanel.add(quan, c);
+
+        c = new GridBagConstraints();
+        JTextField amount = new JTextField();
+        amount.setMinimumSize(new Dimension(100, 30));
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        healthPanel.add(amount, c);
+
+        c = new GridBagConstraints();
+        JButton buy = new JButton("Repair");
+        buy.addActionListener(e -> {
+            int boughtF = 0;
+            try {
+                boughtF = Integer.parseInt(amount.getText());
+            } catch (Exception f) {
+                boughtF = 0;
+            }
+            if (boughtF != 0) {
+                if (boughtF * price > Player.getCredits()) {
+                    ConfirmationBoxUI notEnoughMoney = new ConfirmationBoxUI();
+                    notEnoughMoney.confirmBox("Not enough money to purchase.", "Ok");
+                } else if (boughtF + Player.getShip().getShipHealth() > Player.getShip().getShipHealthMax()) {
+                    ConfirmationBoxUI notEnoughSpace = new ConfirmationBoxUI();
+                    notEnoughSpace.confirmBox("That's more repairing than you need!", "Ok");
+                } else {
+                    Player.getShip().setShipHealth(Player.getShip().getShipHealth() + boughtF);
+                    Player.subCredits(boughtF * price);
+                }
+                playerInfo.setListData(Player.toArray());
+                shipList.setListData(Player.getShip().toArray());
+                amount.setText("");
+            }
+        });
+        c.gridy = 4;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        healthPanel.add(buy, c);
+
+        c = new GridBagConstraints();
+        c.gridx = 2;
+        c.gridy = 2;
+        frame.add(healthPanel, c);
     }
 
     public static JFrame getFrame() {
