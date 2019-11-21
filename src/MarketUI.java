@@ -8,6 +8,10 @@ public class MarketUI {
     private static int regDisplayMark;
     private static int regDisplayPlayer;
     private static JFrame frame;
+    private static JList regFocus;
+    private static JList regFocusPlayer;
+    private static JList playerInfo;
+    private static JList shipList;
 
     public MarketUI(Game game, Market market) {
         this.game = game;
@@ -19,29 +23,80 @@ public class MarketUI {
     static void openMarket() {
         frame = new JFrame("" + game.getPlayer().getRegion().getName() + " Market");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setSize(500, 300);
+        frame.setSize(500, 450);
         frame.setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
 
         //Market Panel
 
-        JList playerInfo = new JList(Player.toArray());
+        playerInfo = new JList(Player.toArray());
         playerPanel(playerInfo);
 
-        JList shipList = new JList(Player.getShip().toArray());
+        shipList = new JList(Player.getShip().toArray());
         shipPanel(shipList);
 
         JPanel marketPanel = new JPanel();
         marketPanel.setLayout(new GridBagLayout());
+        marketPanel(marketPanel);
 
-        JLabel mark = new JLabel("Market Goods:");
+        //Player Panel
+
+        JPanel playerPanel = new JPanel();
+        playerPanel.setLayout(new GridBagLayout());
+        playerPanel(playerPanel);
+
+        JPanel fuelPanel = new JPanel();
+        fuelPanel.setLayout(new GridBagLayout());
+        fuelPanel(fuelPanel);
+
+
+        JButton doneButton = new JButton("Done");
         c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 3;
+        doneButton.addActionListener(e -> {
+            new GameUI(MarketUI.game);
+            GameUI.playGame();
+            MarketUI.frame.setVisible(false);
+        });
+
+        frame.add(doneButton, c);
+
+        frame.setLocationRelativeTo(null);
+        frame.setVisible(true);
+    }
+
+    private static void shipPanel(JList shipList) {
+        JPanel shipPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 2;
+        c.gridy = 0;
+        c.weightx = .33;
+        shipPanel.add(shipList);
+        frame.add(shipPanel, c);
+    }
+
+    private static void playerPanel(JList playerInfo) {
+        JPanel playerPanel = new JPanel();
+        GridBagConstraints c = new GridBagConstraints();
+        c.anchor = GridBagConstraints.NORTH;
+        c.gridx = 0;
+        c.gridy = 0;
+        c.weightx = .33;
+        playerPanel.add(playerInfo);
+        frame.add(playerInfo, c);
+    }
+
+    private static void marketPanel(JPanel marketPanel) {
+        JLabel mark = new JLabel("Market Goods:");
+        GridBagConstraints c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 0;
 
         marketPanel.add(mark, c);
 
-        JList regFocus = new JList(market.toArray(regDisplayMark));
+        regFocus = new JList(market.toArray(regDisplayMark));
         c = new GridBagConstraints();
         c.gridx = 1;
         c.gridy = 1;
@@ -79,66 +134,6 @@ public class MarketUI {
         });
 
         marketPanel.add(rightMark, c);
-
-        c = new GridBagConstraints();
-        c.gridy = 1;
-        c.gridx = 2;
-        c.weightx = 1;
-        c.anchor = GridBagConstraints.EAST;
-
-        frame.add(marketPanel, c);
-
-        //Player Panel
-
-        JPanel playerPanel = new JPanel();
-        playerPanel.setLayout(new GridBagLayout());
-
-
-        JLabel pl = new JLabel("Inventory:");
-        c = new GridBagConstraints();
-        c.gridx = 1;
-        c.gridy = 0;
-
-        playerPanel.add(pl, c);
-
-        JList regFocusPlayer = new JList(game.getPlayer().invToArray(regDisplayPlayer));
-        c = new GridBagConstraints();
-        c.gridx = 1;
-        c.gridy = 1;
-
-        playerPanel.add(regFocusPlayer, c);
-
-        JButton leftPlayer = new JButton("<");
-        c = new GridBagConstraints();
-        c.gridx = 0;
-        c.gridy = 1;
-        c.anchor = GridBagConstraints.CENTER;
-        leftPlayer.addActionListener(e -> {
-            if (regDisplayPlayer == 0) {
-                regDisplayPlayer = game.getPlayer().getInvSize() - 1;
-            } else {
-                regDisplayPlayer--;
-            }
-            regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
-        });
-
-        playerPanel.add(leftPlayer, c);
-
-        JButton rightPlayer = new JButton(">");
-        c = new GridBagConstraints();
-        c.gridx = 2;
-        c.gridy = 1;
-        c.anchor = GridBagConstraints.CENTER;
-        rightPlayer.addActionListener(e -> {
-            if (regDisplayPlayer == game.getPlayer().getInvSize() - 1) {
-                regDisplayPlayer = 0;
-            } else {
-                regDisplayPlayer++;
-            }
-            regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
-        });
-
-        playerPanel.add(rightPlayer, c);
 
         //**** Buy Button ****
         JButton buyButton = new JButton("Buy");
@@ -180,6 +175,62 @@ public class MarketUI {
 
         marketPanel.add(buyButton, c);
 
+        c = new GridBagConstraints();
+        c.gridy = 1;
+        c.gridx = 2;
+        c.weightx = 1;
+        c.anchor = GridBagConstraints.EAST;
+
+        frame.add(marketPanel, c);
+    }
+
+    private static void playerPanel(JPanel playerPanel) {
+        JLabel pl = new JLabel("Inventory:");
+        GridBagConstraints c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 0;
+
+        playerPanel.add(pl, c);
+
+        regFocusPlayer = new JList(game.getPlayer().invToArray(regDisplayPlayer));
+        c = new GridBagConstraints();
+        c.gridx = 1;
+        c.gridy = 1;
+
+        playerPanel.add(regFocusPlayer, c);
+
+        JButton leftPlayer = new JButton("<");
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.CENTER;
+        leftPlayer.addActionListener(e -> {
+            if (regDisplayPlayer == 0) {
+                regDisplayPlayer = game.getPlayer().getInvSize() - 1;
+            } else {
+                regDisplayPlayer--;
+            }
+            regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
+        });
+
+        playerPanel.add(leftPlayer, c);
+
+        JButton rightPlayer = new JButton(">");
+        c = new GridBagConstraints();
+        c.gridx = 2;
+        c.gridy = 1;
+        c.anchor = GridBagConstraints.CENTER;
+        rightPlayer.addActionListener(e -> {
+            if (regDisplayPlayer == game.getPlayer().getInvSize() - 1) {
+                regDisplayPlayer = 0;
+            } else {
+                regDisplayPlayer++;
+            }
+            regFocusPlayer.setListData(game.getPlayer().invToArray(regDisplayPlayer));
+        });
+
+        playerPanel.add(rightPlayer, c);
+
         //***** Sell Button ****
         JButton sellButton = new JButton("Sell");
         c = new GridBagConstraints();
@@ -215,42 +266,71 @@ public class MarketUI {
 
         frame.add(playerPanel, c);
 
-        JButton doneButton = new JButton("Done");
-        c = new GridBagConstraints();
-        c.gridx = 1;
-        c.gridy = 2;
-        doneButton.addActionListener(e -> {
-            new GameUI(MarketUI.game);
-            GameUI.playGame();
-            MarketUI.frame.setVisible(false);
-        });
-
-        frame.add(doneButton, c);
-
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 
-    private static void shipPanel(JList shipList) {
-        JPanel shipPanel = new JPanel();
+    private static void fuelPanel(JPanel fuelPanel) {
         GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.NORTH;
-        c.gridx = 2;
-        c.gridy = 0;
-        c.weightx = .33;
-        shipPanel.add(shipList);
-        frame.add(shipPanel, c);
-    }
-
-    private static void playerPanel(JList playerInfo) {
-        JPanel playerPanel = new JPanel();
-        GridBagConstraints c = new GridBagConstraints();
-        c.anchor = GridBagConstraints.NORTH;
+        JLabel fuel = new JLabel("Refuel");
         c.gridx = 0;
         c.gridy = 0;
-        c.weightx = .33;
-        playerPanel.add(playerInfo);
-        frame.add(playerInfo, c);
+        c.gridwidth = 2;
+        fuelPanel.add(fuel, c);
+
+        c = new GridBagConstraints();
+        JLabel cost = new JLabel("Cost: 3");
+        c.gridx = 0;
+        c.gridy = 1;
+        fuelPanel.add(cost, c);
+
+        c = new GridBagConstraints();
+        JLabel quan = new JLabel("Amount: ");
+        c.gridx = 0;
+        c.gridy = 2;
+        fuelPanel.add(quan, c);
+
+        c = new GridBagConstraints();
+        JTextField amount = new JTextField();
+        amount.setMinimumSize(new Dimension(100, 30));
+        c.gridx = 0;
+        c.gridy = 3;
+        c.gridwidth = GridBagConstraints.REMAINDER;
+        c.fill = GridBagConstraints.HORIZONTAL;
+        fuelPanel.add(amount, c);
+
+        c = new GridBagConstraints();
+        JButton buy = new JButton("Refuel");
+        buy.addActionListener(e -> {
+            int boughtF = 0;
+            try {
+                boughtF = Integer.parseInt(amount.getText());
+            } catch (Exception f) {
+                boughtF = 0;
+            }
+            if (boughtF != 0) {
+                if (boughtF * 3 > Player.getCredits()) {
+                    ConfirmationBoxUI notEnoughMoney = new ConfirmationBoxUI();
+                    notEnoughMoney.confirmBox("Not enough money to purchase", "Ok");
+                } else if (boughtF > Player.getShip().getFuelCapacity() - Player.getFuel()) {
+                    ConfirmationBoxUI notEnoughSpace = new ConfirmationBoxUI();
+                    notEnoughSpace.confirmBox("Not enough space to purchase", "Ok");
+                } else {
+                    Player.addFuel(boughtF);
+                    Player.subCredits(boughtF * 3);
+                }
+                playerInfo.setListData(Player.toArray());
+                shipList.setListData(Player.getShip().toArray());
+                amount.setText("");
+            }
+        });
+        c.gridy = 4;
+        c.gridx = 0;
+        c.gridwidth = 2;
+        fuelPanel.add(buy, c);
+
+        c = new GridBagConstraints();
+        c.gridx = 0;
+        c.gridy = 2;
+        frame.add(fuelPanel, c);
     }
 
     public static JFrame getFrame() {

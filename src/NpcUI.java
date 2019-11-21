@@ -104,18 +104,18 @@ public class NpcUI {
             if (demandAmount > Player.getCredits() && Player.getInvSize() == 0) {
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - payGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
-                if (Player.getShip().getShipHealth() <= 0)
-                {
-                    EndUI.endUI(game, "You Have Lost!");
-                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
-                ConfirmationBoxUI.actionBox("The bandit attacked you and fled!"
-                        , "Ok", ActionListener -> {
-                        new GameUI(NpcUI.game);
-                        GameUI.playGame();
-                    });
+                if (Player.getShip().getShipHealth() <= 0) {
+                    EndUI.endUI(game, "You Have Lost!");
+                } else {
+                    ConfirmationBoxUI.actionBox("The bandit attacked you and fled!"
+                            , "Ok", ActionListener -> {
+                            new GameUI(NpcUI.game);
+                            GameUI.playGame();
+                        });
+                }
             } else if (demandAmount > Player.getCredits()) {
                 Player.resetInventory();
                 frame.setVisible(false);
@@ -161,19 +161,19 @@ public class NpcUI {
                 Player.setCredits(0);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fleeGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
-                if (Player.getShip().getShipHealth() <= 0)
-                {
-                    EndUI.endUI(game, "You Have Lost!");
-                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(curr);
-                ConfirmationBoxUI.actionBox("You couldn't escape."
-                                + " You suffered damage and lost all your credits."
-                        , "Ok", ActionListener -> {
-                        new GameUI(NpcUI.game);
-                        GameUI.playGame();
-                    });
+                if (Player.getShip().getShipHealth() <= 0) {
+                    EndUI.endUI(game, "You Have Lost!");
+                } else {
+                    ConfirmationBoxUI.actionBox("You couldn't escape."
+                                    + " You suffered damage and lost all your credits."
+                            , "Ok", ActionListener -> {
+                            new GameUI(NpcUI.game);
+                            GameUI.playGame();
+                        });
+                }
             }
         });
         frame.add(flee, c);
@@ -201,18 +201,18 @@ public class NpcUI {
                 Player.setCredits(0);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fightGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
-                if (Player.getShip().getShipHealth() <= 0)
-                {
-                    EndUI.endUI(game, "You Have Lost!");
-                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
-                ConfirmationBoxUI.actionBox("You couldn't defeat the bandit."
-                        + " You lost your credits and took damage.", "Ok", ActionListener -> {
-                        new GameUI(NpcUI.game);
-                        GameUI.playGame();
-                    });
+                if (Player.getShip().getShipHealth() <= 0) {
+                    EndUI.endUI(game, "You Have Lost!");
+                } else {
+                    ConfirmationBoxUI.actionBox("You couldn't defeat the bandit."
+                            + " You lost your credits and took damage.", "Ok", ActionListener -> {
+                            new GameUI(NpcUI.game);
+                            GameUI.playGame();
+                        });
+                }
             }
         });
         frame.add(fight, c);
@@ -324,20 +324,21 @@ public class NpcUI {
                 Player.setCredits(Player.getCredits() / 2);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fleeGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
-                if (Player.getShip().getShipHealth() <= 0)
-                {
-                    EndUI.endUI(game, "You Have Lost!");
-                }
+
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(curr);
-                ConfirmationBoxUI.actionBox(String.format("You couldn't escape. "
-                                + "The officer has confiscated the %s and "
-                                + "punished you greatly for resisting."
-                        , item.getName()), "Ok", ActionListener -> {
-                        new GameUI(NpcUI.game);
-                        GameUI.playGame();
-                    });
+                if (Player.getShip().getShipHealth() <= 0) {
+                    EndUI.endUI(game, "You Have Lost!");
+                } else {
+                    ConfirmationBoxUI.actionBox(String.format("You couldn't escape. "
+                                    + "The officer has confiscated the %s and "
+                                    + "punished you greatly for resisting."
+                            , item.getName()), "Ok", ActionListener -> {
+                            new GameUI(NpcUI.game);
+                            GameUI.playGame();
+                        });
+                }
             }
         });
         frame.add(flee, c);
@@ -365,19 +366,20 @@ public class NpcUI {
                 Player.setCredits(0);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fightGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
-                if (Player.getShip().getShipHealth() <= 0)
-                {
-                    EndUI.endUI(game, "You Have Lost!");
-                }
+
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
-                ConfirmationBoxUI.actionBox("You couldn't defeat the officer."
-                        + " You lost your credits and item and took damage."
-                        , "Ok", ActionListener -> {
-                        new GameUI(NpcUI.game);
-                        GameUI.playGame();
-                    });
+                if (Player.getShip().getShipHealth() <= 0) {
+                    EndUI.endUI(game, "You Have Lost!");
+                } else {
+                    ConfirmationBoxUI.actionBox("You couldn't defeat the officer."
+                                    + " You lost your credits and item and took damage."
+                            , "Ok", ActionListener -> {
+                            new GameUI(NpcUI.game);
+                            GameUI.playGame();
+                        });
+                }
             }
         });
         frame.add(fight, c);
@@ -515,19 +517,19 @@ public class NpcUI {
             } else {
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - robGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
-                if (Player.getShip().getShipHealth() <= 0)
-                {
-                    EndUI.endUI(game, "You Have Lost!");
-                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
-                ConfirmationBoxUI.actionBox(String.format("You couldn't steal the %s, "
-                                + "you took damage in the scuffle."
-                        , item.getName()), "Ok", ActionListener -> {
-                        new GameUI(NpcUI.game);
-                        GameUI.playGame();
-                    });
+                if (Player.getShip().getShipHealth() <= 0) {
+                    EndUI.endUI(game, "You Have Lost!");
+                } else {
+                    ConfirmationBoxUI.actionBox(String.format("You couldn't steal the %s, "
+                                    + "you took damage in the scuffle."
+                            , item.getName()), "Ok", ActionListener -> {
+                            new GameUI(NpcUI.game);
+                            GameUI.playGame();
+                        });
+                }
             }
         });
         frame.add(rob, c);
