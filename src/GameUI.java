@@ -263,7 +263,7 @@ public class GameUI {
         frame.add(travelPanel, c);
     }
 
-    public void restartGame() {
+    public static void restartGame() {
         frame.setVisible(false);
         frame.dispose();
         WelcomeScreen.main(null);

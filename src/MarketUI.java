@@ -150,6 +150,14 @@ public class MarketUI {
                 if (market.getGoodCargo(regDisplayMark) <= game.getPlayer().getCargoLeft()) {
                     game.getPlayer().subCargoLeft(market.getGoodCargo(regDisplayMark));
                     game.getPlayer().subCredits((int) market.getGoodBuyPrice(regDisplayMark));
+
+                    if (market.getGoodName(regDisplayMark).equals(Player.getName() + "'s Universe")) {
+                        //end game
+                        frame.setVisible(false);
+                        frame.dispose();
+                        EndUI.endUI(game, "You Have Won!");
+                    }
+
                     game.getPlayer().addInv(market.removeGood(regDisplayMark));
                     if (regDisplayMark >= market.getGoodsLength() && market.getGoodsLength() != 0) {
                         regDisplayMark = market.getGoodsLength() - 1;

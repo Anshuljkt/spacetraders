@@ -23,7 +23,7 @@ public class Market {
                 , 1000, 0, TechLevel.PREAGRICULTURAL));
         if (isGameWinning)
         {
-            goods.add(new Item( "'s Universe", 9999, 9999, 9999, 0, TechLevel.PREAGRICULTURAL));
+            goods.add(new Item(  Player.getName() + "'s Universe", 9999, 9999, 9999, 0, TechLevel.PREAGRICULTURAL));
         }
     }
 
@@ -57,6 +57,10 @@ public class Market {
 
     public void addGood(Item item) {
         goods.add(item);
+    }
+
+    public String getGoodName(int goodNum) {
+        return goods.get(goodNum).getName();
     }
 
 }

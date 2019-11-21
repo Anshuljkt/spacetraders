@@ -104,6 +104,10 @@ public class NpcUI {
             if (demandAmount > Player.getCredits() && Player.getInvSize() == 0) {
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - payGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                if (Player.getShip().getShipHealth() <= 0)
+                {
+                    EndUI.endUI(game, "You Have Lost!");
+                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
@@ -157,6 +161,10 @@ public class NpcUI {
                 Player.setCredits(0);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fleeGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                if (Player.getShip().getShipHealth() <= 0)
+                {
+                    EndUI.endUI(game, "You Have Lost!");
+                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(curr);
@@ -193,6 +201,10 @@ public class NpcUI {
                 Player.setCredits(0);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fightGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                if (Player.getShip().getShipHealth() <= 0)
+                {
+                    EndUI.endUI(game, "You Have Lost!");
+                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
@@ -312,6 +324,10 @@ public class NpcUI {
                 Player.setCredits(Player.getCredits() / 2);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fleeGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                if (Player.getShip().getShipHealth() <= 0)
+                {
+                    EndUI.endUI(game, "You Have Lost!");
+                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(curr);
@@ -349,6 +365,10 @@ public class NpcUI {
                 Player.setCredits(0);
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - fightGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                if (Player.getShip().getShipHealth() <= 0)
+                {
+                    EndUI.endUI(game, "You Have Lost!");
+                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
@@ -495,6 +515,10 @@ public class NpcUI {
             } else {
                 Player.getShip().setShipHealth(Player.getShip().getShipHealth()
                         - robGen.nextInt(Player.getShip().getShipHealthMax() / 2) + 1);
+                if (Player.getShip().getShipHealth() <= 0)
+                {
+                    EndUI.endUI(game, "You Have Lost!");
+                }
                 frame.setVisible(false);
                 frame.dispose();
                 Player.setRegion(next);
