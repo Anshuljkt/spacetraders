@@ -3,8 +3,7 @@ import java.awt.*;
 
 public class EndUI {
 
-    public static void endUI(Game game, String message)
-    {
+    public static void endUI(Game game, String message) {
         JFrame frame = new JFrame();
         frame.setSize(500, 150);
         frame.setLayout(new GridBagLayout());

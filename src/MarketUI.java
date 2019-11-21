@@ -150,7 +150,8 @@ public class MarketUI {
                     game.getPlayer().subCargoLeft(market.getGoodCargo(regDisplayMark));
                     game.getPlayer().subCredits((int) market.getGoodBuyPrice(regDisplayMark));
 
-                    if (market.getGoodName(regDisplayMark).equals(Player.getName() + "'s Universe")) {
+                    if (market.getGoodName(regDisplayMark)
+                            .equals(Player.getName() + "'s Universe")) {
                         //end game
                         frame.setVisible(false);
                         frame.dispose();
@@ -313,10 +314,10 @@ public class MarketUI {
             if (boughtF != 0) {
                 if (boughtF * 5 > Player.getCredits()) {
                     ConfirmationBoxUI notEnoughMoney = new ConfirmationBoxUI();
-                    notEnoughMoney.confirmBox("Not enough money to purchase", "Ok");
+                    notEnoughMoney.confirmBox("Not enough money to purchase.", "Ok");
                 } else if (boughtF > Player.getShip().getFuelCapacity() - Player.getFuel()) {
                     ConfirmationBoxUI notEnoughSpace = new ConfirmationBoxUI();
-                    notEnoughSpace.confirmBox("Not enough space to purchase", "Ok");
+                    notEnoughSpace.confirmBox("That's more fuel than you need!", "Ok");
                 } else {
                     Player.addFuel(boughtF);
                     Player.subCredits(boughtF * 5);
@@ -338,7 +339,7 @@ public class MarketUI {
     }
 
     private static void healthPanel(JPanel healthPanel) {
-        int price = 25/(Player.getEngineer() + 1) + 1;
+        int price = 25 / (Player.getEngineer() + 1) + 1;
         GridBagConstraints c = new GridBagConstraints();
         JLabel fuel = new JLabel("Repair");
         c.gridx = 0;
@@ -380,7 +381,8 @@ public class MarketUI {
                 if (boughtF * price > Player.getCredits()) {
                     ConfirmationBoxUI notEnoughMoney = new ConfirmationBoxUI();
                     notEnoughMoney.confirmBox("Not enough money to purchase.", "Ok");
-                } else if (boughtF + Player.getShip().getShipHealth() > Player.getShip().getShipHealthMax()) {
+                } else if (boughtF + Player.getShip()
+                        .getShipHealth() > Player.getShip().getShipHealthMax()) {
                     ConfirmationBoxUI notEnoughSpace = new ConfirmationBoxUI();
                     notEnoughSpace.confirmBox("That's more repairing than you need!", "Ok");
                 } else {

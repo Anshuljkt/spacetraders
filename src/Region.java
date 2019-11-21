@@ -9,7 +9,8 @@ public class Region {
     private Market market;
     private double priceAdjust;
 
-    public Region(int x, int y, TechLevel techLevel, String name, int merchantSkill, boolean isGameWinning) {
+    public Region(int x, int y, TechLevel techLevel
+            , String name, int merchantSkill, boolean isGameWinning) {
         this.x = x;
         this.y = y;
         this.techLevel = techLevel;

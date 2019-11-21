@@ -21,9 +21,9 @@ public class Market {
         goods.add(new Item("Ship", 1000 * (techLevel.getPriceAdjust() + priceAdjust)
                 , 1000 * (techLevel.getPriceAdjust() - priceAdjust)
                 , 1000, 0, TechLevel.PREAGRICULTURAL));
-        if (isGameWinning)
-        {
-            goods.add(new Item(  Player.getName() + "'s Universe", 9999, 9999, 9999, 0, TechLevel.PREAGRICULTURAL));
+        if (isGameWinning) {
+            goods.add(new Item(Player.getName() + "'s Universe",
+                    9999, 9999, 9999, 0, TechLevel.PREAGRICULTURAL));
         }
     }
 
