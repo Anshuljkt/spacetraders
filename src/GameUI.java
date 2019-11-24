@@ -130,7 +130,7 @@ public class GameUI {
         fuelCostText.setHorizontalAlignment(JLabel.CENTER);
         fuelCostText.setText("<html>" + fuelCostTextDesc + (game
                 .getUniverse().getRegions()[regDisplay]
-                .findDistance() / Player.getPilot() / 5) + "</html>");
+                .findDistance() / (Player.getPilot() + 1) / 5) + "</html>");
         c.gridx = 1;
         c.gridy = 3;
 
@@ -152,7 +152,7 @@ public class GameUI {
                     .findDistance() + "</html>");
             fuelCostText.setText("<html>" + fuelCostTextDesc + (game
                     .getUniverse().getRegions()[regDisplay]
-                    .findDistance() / Player.getPilot() / 5) + "</html>");
+                    .findDistance() / (Player.getPilot() + 1) / 5) + "</html>");
         });
 
         travelPanel.add(left, c);
@@ -173,7 +173,7 @@ public class GameUI {
                     .findDistance() + "</html>");
             fuelCostText.setText("<html>" + fuelCostTextDesc + (game
                     .getUniverse().getRegions()[regDisplay]
-                    .findDistance() / Player.getPilot() / 5) + "</html>");
+                    .findDistance() / (Player.getPilot() + 1) / 5) + "</html>");
         });
 
         travelPanel.add(right, c);
@@ -190,13 +190,13 @@ public class GameUI {
                         .confirmBox("You cannot travel to the region you're already in.", "Ok");
             } else if (Player.getFuel() >= game
                     .getUniverse().getRegions()[regDisplay].findDistance()
-                    / Player.getPilot() / 5) {
+                    / (Player.getPilot() + 1) / 5) {
                 ConfirmationBoxUI travelConf = new ConfirmationBoxUI();
                 ConfirmationBoxUI.actionConfirmBox("Are you sure you'd like to travel here?"
                         , "Yes", ActionListener -> {
                         Player.subFuel(game
                             .getUniverse().getRegions()[regDisplay]
-                            .findDistance() / Player.getPilot() / 5);
+                            .findDistance() / (Player.getPilot() + 1) / 5);
                         Random rand = new Random();
                         double encounterChance = rand.nextDouble();
                         double threshold = .5;
@@ -242,7 +242,7 @@ public class GameUI {
                             .findDistance() + "</html>");
                         fuelCostText.setText("<html>" + fuelCostTextDesc + (game
                             .getUniverse().getRegions()[regDisplay]
-                            .findDistance() / Player.getPilot()) + "</html>");
+                            .findDistance() / (Player.getPilot() + 1) / 5) + "</html>");
                         playerInfo.setListData(Player.toArray());
                         shipList.setListData(Player.getShip().toArray());
                         Player.adjustInvPricing();

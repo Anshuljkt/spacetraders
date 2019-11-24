@@ -55,7 +55,7 @@ public class Region {
 
     private void calcPriceAdjust(int merchantSkill) {
         Random random = new Random();
-        priceAdjust = Math.random() / 4 / merchantSkill;
+        priceAdjust = Math.random() / 4 / (merchantSkill + 1);
     }
 
     public double getPriceAdjust() {

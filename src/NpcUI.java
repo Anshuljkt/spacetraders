@@ -391,7 +391,7 @@ public class NpcUI {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Random gen = new Random();
         item = new ShipUpgrade(TechLevel.getRandomTech()
-                , gen.nextDouble() / 4 / Player.getMerchant());
+                , gen.nextDouble() / 4 / (Player.getMerchant() + 1));
         frame.setSize(800, 600);
         frame.setLayout(new GridBagLayout());
         frame.setLocationRelativeTo(null);
