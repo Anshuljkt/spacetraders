@@ -248,7 +248,10 @@ class WelcomeScreen {
                 engineer = Integer.parseInt(engineerBox.getText());
                 name = nameBox.getText();
             } catch (Exception f) {
-                //f.printStackTrace();
+                pilot = -1;
+                fighter = -1;
+                merchant = -1;
+                engineer = -1;
             }
             if (pilot < 0 || fighter < 0 || merchant < 0 || engineer < 0) {
                 ConfirmationBoxUI.confirmBox("At least one of your inputs is invalid.", "Ok");
