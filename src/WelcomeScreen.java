@@ -248,17 +248,29 @@ class WelcomeScreen {
                 engineer = Integer.parseInt(engineerBox.getText());
                 name = nameBox.getText();
             } catch (Exception f) {
-                //f.printStackTrace();
+                pilot = -1;
+                fighter = -1;
+                merchant = -1;
+                engineer = -1;
             }
-            createdPlayer = new Player(name, pilot, fighter, merchant, engineer, skillPoints);
-            if (difficulty.equals("Easy")) {
-                Player.setCredits(1500);
-            } else if (difficulty.equals("Medium")) {
-                Player.setCredits(1000);
+            if (pilot < 0 || fighter < 0 || merchant < 0 || engineer < 0) {
+                ConfirmationBoxUI.confirmBox("At least one of your inputs is invalid.", "Ok");
+            } else if (pilot + fighter + merchant + engineer > skillPoints) {
+                ConfirmationBoxUI.confirmBox("You do not have that many skill points.", "Ok");
+            } else if (pilot + fighter + merchant + engineer < skillPoints) {
+                ConfirmationBoxUI.confirmBox("You have more points to spend.", "Ok");
             } else {
-                Player.setCredits(500);
+                createdPlayer = new Player(name, pilot, fighter, merchant, engineer, skillPoints);
+                if (difficulty.equals("Easy")) {
+                    Player.setCredits(1500);
+                } else if (difficulty.equals("Medium")) {
+                    Player.setCredits(1000);
+                } else {
+                    Player.setCredits(500);
+                }
+                newGame(finalFrame);
             }
-            newGame(finalFrame);
+
         });
         frame.add(startButton, c);
         frame.setLocationRelativeTo(null);
